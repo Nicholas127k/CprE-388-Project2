@@ -2,12 +2,14 @@ package com.example.model;
 
 public class Classes {
     public static final String FIELD_CLASS = "clasz";
+    public static final String FIELD_DEPARTMENT = "department";
     public static final String FIELD_NAME = "name";
     public static final String FIELD_NUMBER = "number";
     public static final String FIELD_ID = "id";
     public static final String FIELD_DESCRIPTION = "description";
 
     private String clasz;
+    private String department;
     private String name;
     private String description;
     private int number;
@@ -15,8 +17,9 @@ public class Classes {
 
     public Classes() {}
 
-    public Classes(String clasz, String name, String description, int number, int id) {
+    public Classes(String clasz, String department, String name, String description, int number, int id) {
         this.clasz = clasz;
+        this.department = department;
         this.name = name;
         this.description = description;
         this.number = number;

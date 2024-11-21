@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956482560033",
+    "project_id": "classify-781e8",
+    "storage_bucket": "classify-781e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956482560033:android:54c6fdccf9eb966124c360",
+        "android_client_info": {
+          "package_name": "com.example.workdaybutbetter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtAUJ8YNCaSG1AAIVKKQ_VpJ1yhQb_-J0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
