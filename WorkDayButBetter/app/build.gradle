@@ -57,6 +57,7 @@ dependencies {
     implementation libs.activity
     implementation libs.firebase.firestore
     implementation libs.firebase.auth
+    implementation libs.firebase.auth
 
 
     // Other Firebase/Play services deps
