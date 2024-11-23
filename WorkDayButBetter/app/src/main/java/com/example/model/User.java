@@ -36,9 +36,8 @@ public class User {
 
         return userType;
     }
-
-    public void setUserType(int userType) {
-        /** YOU KNOW WHAT THIS TASTE LIKE PROMOTION **/
+    public void promoteUserType(int userType) {
+        /** YOU KNOW WHAT THIS TASTE LIKE It TASTE LIKE PROMOTION **/
         this.userType = userType;
     }
     public int getUserId() {
