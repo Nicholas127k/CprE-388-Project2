@@ -32,8 +32,19 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setUserType(int userType) {
-        /** YOU KNOW WHAT THIS TASTE LIKE PROMOTION **/
+    public int getUserType() {
+
+        return userType;
+    }
+    public void promoteUserType(int userType) {
+        /** YOU KNOW WHAT THIS TASTE LIKE It TASTE LIKE PROMOTION **/
         this.userType = userType;
+    }
+    public int getUserId() {
+        return id;
+    }
+
+    public void setUserId(String username) {
+        this.id = id;
     }
 }
