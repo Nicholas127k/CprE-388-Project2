@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.data_classes;
 
 public class Classes {
     public static final String FIELD_CLASS = "clasz";

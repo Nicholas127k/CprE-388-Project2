@@ -2,10 +2,7 @@ package com.example.Util;
 
 import android.content.Context;
 
-import com.example.model.Classes;
-
-import java.util.Arrays;
-import java.util.Random;
+import com.example.data_classes.Classes;
 
 public class ClassUtil {
     private static final String TAG = "ClassUtil";
