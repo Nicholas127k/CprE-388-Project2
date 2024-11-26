@@ -1,0 +1,21 @@
+[debug] [2024-11-26T19:35:33.745Z] ----------------------------------------------------------------------
+[debug] [2024-11-26T19:35:33.747Z] Command:       /usr/local/bin/firebase /Users/nathanperkins/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase
+[debug] [2024-11-26T19:35:33.748Z] CLI Version:   13.27.0
+[debug] [2024-11-26T19:35:33.748Z] Platform:      darwin
+[debug] [2024-11-26T19:35:33.748Z] Node Version:  v18.5.0
+[debug] [2024-11-26T19:35:33.751Z] Time:          Tue Nov 26 2024 13:35:33 GMT-0600 (Central Standard Time)
+[debug] [2024-11-26T19:35:33.751Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-26T19:35:33.759Z] TypeError: Cannot read properties of undefined (reading '0')
+    at Command.<anonymous> (/Users/nathanperkins/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/index.js:58:21)
+    at Command.listener [as _actionHandler] (/Users/nathanperkins/.cache/firebase/tools/lib/node_modules/commander/index.js:413:31)
+    at Command._parseCommand (/Users/nathanperkins/.cache/firebase/tools/lib/node_modules/commander/index.js:914:14)
+    at Command.parse (/Users/nathanperkins/.cache/firebase/tools/lib/node_modules/commander/index.js:717:10)
+    at Object.<anonymous> (/Users/nathanperkins/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase.js:129:22)
+    at Module._compile (node:internal/modules/cjs/loader:1112:14)
+    at Module._compile (pkg/prelude/bootstrap.js:1890:32)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1166:10)
+    at Module.load (node:internal/modules/cjs/loader:988:32)
+    at Module._load (node:internal/modules/cjs/loader:834:12)
+[error] 
+[error] Error: An unexpected error has occurred.
