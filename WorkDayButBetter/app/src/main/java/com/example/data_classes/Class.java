@@ -43,27 +43,11 @@ public class Class {
      */
     private String description;
 
-    /**
-     *
-     * The classMemberBuckets member is used to store class members in their respective
-     * section buckets
-     *
-     */
-    private HashMap<Integer, List<User>> classMemberBuckets;
+    private HashMap<Integer, Section> sectionBuckets;
 
-    /**
-     *
-     * The sectionBuckets member is used to store and convert an integer index to a section definition
-     *
-     */
-    private HashMap<Integer, String> sectionBuckets;
+    private List<User> classMembers;
 
-    /**
-     *
-     * The sectionTimeBuckets member is used to store and convert an integer index to a class section time range
-     *
-     */
-    private HashMap<Integer, ClassSectionTimeRange> sectionTimeBuckets;
+    private List<User> signUpQueue;
 
     public Class() {
         this.department = null;
