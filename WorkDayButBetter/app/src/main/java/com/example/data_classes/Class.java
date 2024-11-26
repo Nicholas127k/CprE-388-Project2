@@ -46,10 +46,36 @@ public class Class {
      */
     private String description;
 
+    /**
+     *
+     * The sectionBuckets member is used to store the different sections of a class with an associated index/key
+     *
+     * @note It is important to note that the section buckets member is not able to be modified from within the java code,
+     * it can only be modified from the backend function
+     *
+     */
     private HashMap<Integer, Section> sectionBuckets;
 
+    /**
+     *
+     * The class members list is a member that is used to store all of the class members inside of a list.
+     * This is useful for general student searches and other non-section related searches.
+     *
+     * @note Like the sectionBuckets member, the class members list should not be written to from the java code.
+     * It should only be modified from the backend functions that put students in a section.
+     *
+     */
     private List<User> classMembers;
 
+    /**
+     *
+     * The sign-up queue member is used as a way to store students in an organized list that will be used by the backend functions
+     * code to put the students in their respective sections.
+     *
+     * @note The sign-up queue is the only list of where students should be stored. Just add a student to the list and when the counselor
+     * clicks the button to assign students to classes, it will take students from the sign-up queue and put them in their respective class sections
+     *
+     */
     private List<User> signUpQueue;
 
     public Class() {
@@ -57,16 +83,18 @@ public class Class {
         this.code = -1;
         this.name = null;
         this.description = null;
+        this.sectionBuckets = new HashMap<>();
         this.classMembers = new ArrayList<>();
         this.signUpQueue = new ArrayList<>();
     }
 
-    public Class(String department, long code, String name, String description, List<User> classMembers, List<User> signUpQueue) {
+    public Class(String department, long code, String name, String description, List<User> signUpQueue) {
         this.department = department;
         this.name = name;
         this.description = description;
         this.code = code;
-        this.classMembers = classMembers;
+        this.sectionBuckets = new HashMap<>();
+        this.classMembers = new ArrayList<>();
         this.signUpQueue = signUpQueue;
     }
 
@@ -101,6 +129,10 @@ public class Class {
         return this.signUpQueue;
     }
 
+    public HashMap<Integer, Section> getSectionBuckets(){
+        return this.sectionBuckets;
+    }
+
     /**
      *
      *
@@ -122,10 +154,6 @@ public class Class {
 
     public void setDescription(String description){
         this.description = description;
-    }
-
-    public void setClassMembers(List<User> classMembers) {
-        this.classMembers = classMembers;
     }
 
     public void setSignUpQueue(List<User> queue){
