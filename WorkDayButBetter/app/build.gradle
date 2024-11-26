@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.constraintlayout
@@ -41,7 +40,14 @@ dependencies {
     implementation libs.activity
     implementation libs.firebase.firestore
     implementation libs.firebase.auth
+
+
+    // Other Firebase/Play services deps
+    implementation libs.firebase.auth.v2101
+    implementation libs.play.services.auth
+
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 }
+
