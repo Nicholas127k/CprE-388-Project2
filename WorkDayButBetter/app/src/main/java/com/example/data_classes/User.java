@@ -5,7 +5,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import java.util.List;
 
 public class User {
-
+    public static final String FIELD_ID = "id_";
     public static final String FIELD_USERNAME = "username";
     public static final String FIELD_FIRSTNAME = "firstname";
     public static final String FIELD_LASTNAME = "lastname";
@@ -28,7 +28,8 @@ public class User {
         this.userType = null;
     }
 
-    public User(String username, String firstname, String lastname, List<Class> classes, UserType userType){
+    public User(int _id, String username, String firstname, String lastname, List<Class> classes, UserType userType){
+        this.id_ = _id;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
