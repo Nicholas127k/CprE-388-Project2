@@ -15,7 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.data_classes.Class;
 import com.example.data_classes.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
@@ -28,7 +31,6 @@ import java.util.List;
 public class AvailableClassesScreen extends AppCompatActivity {
     private EditText searchEditText;
     private Button searchButton;
-
     private DatabaseReference mDatabase;
     private List<Class> classList = new ArrayList<>();
     private ArrayAdapter<Class> adapter;
@@ -37,47 +39,40 @@ public class AvailableClassesScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_available_classes_screen);
+
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
-        mViewList = (ListView) findViewById(R.id.classSearch);
+        mViewList = findViewById(R.id.classSearch);
 
+        // Set up the adapter
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classList);
+        mViewList.setAdapter(adapter);
+
+        fetchClassesFromFirebase();  // Fetch the classes when the activity is created
     }
+
     private void fetchClassesFromFirebase() {
-        // Loop through the response (assuming 'response' is a JSONArray)
-        for (int i = 0; i < response.length(); i++) {
-            try {
-                // Retrieve the JSON object representing each class
-                JSONObject friendObj = response.getJSONObject(i);
-                JSONObject friendUserObj = friendObj.getJSONObject("classes");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("classes");
 
-                // Extract the class details from the JSON object
-                int userId = friendUserObj.getInt("uId");
-                String department = friendUserObj.getString("department");
-                long code = friendUserObj.getLong("code");
-
-                // Assuming 'name' and 'description' are also in the same "classes" object
-                String name = friendUserObj.getString("name"); // Assuming 'name' exists in the data
-                String description = friendUserObj.getString("description"); // Assuming 'description' exists
-
-                // Dont need it so leave it blank
-                List<User> signUpQueue = new ArrayList<>();
-                Class clas = new Class(userId, department, code, name, description, signUpQueue);
-
-                // Now create the Class object and add it to the classList
-
-                classList.add(clas);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                classList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Class clas = snapshot.getValue(Class.class);
+                    if (clas != null) {
+                        classList.add(clas);
+                    }
+                }
+                adapter.notifyDataSetChanged();  // Notify the adapter to refresh the ListView
             }
-        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("AvailableClassesScreen", "loadClasses:onCancelled", databaseError.toException());
+            }
+        });
     }
-
-
-
-
-    }
+}
 
