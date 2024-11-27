@@ -20,7 +20,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.data_classes.Class;
 import com.example.data_classes.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
@@ -56,13 +59,17 @@ public class AvailableClassesScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_available_classes_screen);
 
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
-        mViewList = (ListView) findViewById(R.id.classSearch);
+        mViewList = findViewById(R.id.classSearch);
 
+        // Set up the adapter
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classList);
+        mViewList.setAdapter(adapter);
+
+        fetchClassesFromFirebase();  // Fetch the classes when the activity is created
     }
 
     private void fetchClassesFromFirebase() {
@@ -102,7 +109,24 @@ public class AvailableClassesScreen extends AppCompatActivity {
                 filteredList.add(clas); // Add matching classes to the filtered list
             }
         }
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                classList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Class clas = snapshot.getValue(Class.class);
+                    if (clas != null) {
+                        classList.add(clas);
+                    }
+                }
+                adapter.notifyDataSetChanged();  // Notify the adapter to refresh the ListView
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("AvailableClassesScreen", "loadClasses:onCancelled", databaseError.toException());
+            }
+        });
         // Update the class list with the filtered list
         classList.clear();
         classList.addAll(filteredList);
