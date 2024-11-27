@@ -42,10 +42,12 @@ public class AvailableClassesScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_available_classes_screen);
 
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
+        ListView mViewList = (ListView) findViewById(R.id.classSearch);
         mViewList = findViewById(R.id.classSearch);
         fetchClassesFromFirebase();
         // Set up the adapter

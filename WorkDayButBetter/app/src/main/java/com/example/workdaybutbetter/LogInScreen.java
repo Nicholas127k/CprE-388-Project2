@@ -57,7 +57,7 @@ public class LogInScreen extends AppCompatActivity {
         });
 
 
-       // mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
+        mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
