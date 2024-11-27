@@ -45,7 +45,7 @@ public class LogInScreen extends AppCompatActivity {
         passwordEditText = findViewById(R.id.signup_password_edt);
         loginButton = findViewById(R.id.LogInbutton);
 
-       // mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
+        mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
