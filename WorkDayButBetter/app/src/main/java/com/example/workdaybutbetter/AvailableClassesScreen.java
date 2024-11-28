@@ -1,7 +1,9 @@
 package com.example.workdaybutbetter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +52,12 @@ public class AvailableClassesScreen extends AppCompatActivity {
         mViewList.setAdapter(adapter);
 
         fetchClassesFromFirebase();  // Fetch the classes when the activity is created
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                minipulateClassList();
+            }
+        });
     }
 
     private void fetchClassesFromFirebase() {
@@ -73,6 +81,28 @@ public class AvailableClassesScreen extends AppCompatActivity {
                 Log.w("AvailableClassesScreen", "loadClasses:onCancelled", databaseError.toException());
             }
         });
+    }
+    private void minipulateClassList() {
+        String query = searchEditText.getText().toString().toLowerCase();  // Get the search input and convert to lowercase
+
+        List<Class> filteredList = new ArrayList<>();
+
+        // Loop through each class and check if it matches the search query
+        for (Class clas : classList) {
+            // Check if any class field matches the search query (name, department, or description)
+            if (clas.getName().toLowerCase().contains(query) ||
+                    clas.getDepartment().toLowerCase().contains(query) ||
+                    clas.getDescription().toLowerCase().contains(query)) {
+                filteredList.add(clas); // Add matching classes to the filtered list
+            }
+        }
+
+        // Update the class list with the filtered list
+        classList.clear();
+        classList.addAll(filteredList);
+
+        // Notify the adapter that the data has changed, so the ListView is updated
+        adapter.notifyDataSetChanged();
     }
 }
 
