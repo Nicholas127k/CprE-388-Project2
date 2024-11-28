@@ -16,9 +16,12 @@
         android:theme="@style/Theme.WorkDayButBetter"
         tools:targetApi="31">
         <activity
+            android:name=".ClassScheduleScreen"
+            android:exported="false" />
+        <activity
             android:name=".AvailableClassesScreen"
             android:exported="false"
-            android:theme="@style/Theme.WorkDayButBetter" />
+            android:theme="@style/Theme.WorkDayButBetter" /> <!-- Set LogInScreen as the first screen (launcher activity) -->
         <activity
             android:name=".AdvisorMainScreen"
             android:exported="false" />
@@ -31,9 +34,6 @@
             android:exported="false"
             android:label="@string/title_activity_student_main"
             android:theme="@style/Theme.WorkDayButBetter" />
-        <activity
-            android:name=".ClassScheduleScreen"
-            android:exported="false" />
         <!-- Set LogInScreen as the first screen (launcher activity) -->
         <activity
             android:name=".LogInScreen"
