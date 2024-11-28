@@ -70,6 +70,12 @@ public class AvailableClassesScreen extends AppCompatActivity {
         mViewList.setAdapter(adapter);
 
         fetchClassesFromFirebase();  // Fetch the classes when the activity is created
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                minipulateClassList();
+            }
+        });
     }
 
     private void fetchClassesFromFirebase() {
