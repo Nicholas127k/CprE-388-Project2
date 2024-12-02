@@ -33,6 +33,7 @@ public class LogInScreen extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private FirebaseAuth mAuth;
+    private Button signInButton;
 
 
     @Override
@@ -44,8 +45,17 @@ public class LogInScreen extends AppCompatActivity {
         usernameEditText = findViewById(R.id.signup_username_edt);  // link to username edtext in the Signup activity XML
         passwordEditText = findViewById(R.id.signup_password_edt);
         loginButton = findViewById(R.id.LogInbutton);
-
+        signInButton = findViewById(R.id.SignInbutton);
         mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LogInScreen.this, SignUpScreen.class);
+                startActivity(intent);
+            }
+        });
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
