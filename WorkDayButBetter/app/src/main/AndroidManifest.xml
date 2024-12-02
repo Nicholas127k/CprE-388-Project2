@@ -16,6 +16,11 @@
         android:theme="@style/Theme.WorkDayButBetter"
         tools:targetApi="31">
         <activity
+            android:name=".StudentMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_student_main"
+            android:theme="@style/Theme.WorkDayButBetter" />
+        <activity
             android:name=".ClassScheduleScreen"
             android:exported="false" />
         <activity
