@@ -26,8 +26,8 @@ public class DeleteClassAdapter extends ArrayAdapter<Class> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the class object for this position
-        Class classObj = getItem(position);
 
+        Class classObj = getItem(position);
         // Inflate the layout
         LayoutInflater layoutInflater = LayoutInflater.from(context1);
         convertView = layoutInflater.inflate(layoutResource, parent, false);
