@@ -28,27 +28,38 @@ public class ClassLIstAdapter extends ArrayAdapter<Class> {
         // Get the class object for this position
         Class classObj = getItem(position);
 
+
         // Inflate the layout
         LayoutInflater layoutInflater = LayoutInflater.from(context1);
         convertView = layoutInflater.inflate(layoutResource, parent, false);
 
         // Set up the views
-        TextView user = convertView.findViewById(R.id.delete1Title);
-        Button btn = convertView.findViewById(R.id.bigBoyButton);
+        TextView classText = convertView.findViewById(R.id.format1Title);
+        TextView descripText = convertView.findViewById(R.id.format1Day);
+        TextView classNumb = convertView.findViewById(R.id.DescriptTextbox);
+        TextView time = convertView.findViewById(R.id.time);
 
         // Disable button interactions
-        btn.setFocusable(false);
-        btn.setClickable(false);
+
 
         // Set the text for the class name
         if (classObj != null) {
-            user.setText("Class: " + classObj.getName());
+            classText.setText("Class: " + classObj.getName());
+        }
+        if (classObj != null) {
+            descripText.setText("Desc: " + classObj.getDepartment());
+        }
+        if (classObj != null) {
+            classNumb.setText(classObj.getName());
+        }
+        if (classObj != null) {
+            time.setText("Time: " + classObj.getName());
         }
 
         // You can add any other logic for the button click here if needed
-        btn.setOnClickListener(view -> {
+       // btn.setOnClickListener(view -> {
             // Logic for button click (if needed)
-        });
+        //});
 
         return convertView;
     }
