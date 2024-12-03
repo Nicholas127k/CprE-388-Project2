@@ -16,12 +16,12 @@ import com.example.workdaybutbetter.R;
 import java.util.ArrayList;
 
 public class ClassLIstAdapter extends ArrayAdapter<Class> {
-    int stuff;
+    private final int layoutResource;
     private Context context1;
     public ClassLIstAdapter(Context context, int formatListview, ArrayList<Class> list) {
         super(context, formatListview, list);
         context1 = context;
-        stuff = formatListview;
+        this.layoutResource = formatListview;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -30,7 +30,7 @@ public class ClassLIstAdapter extends ArrayAdapter<Class> {
 
         // Inflate the layout
         LayoutInflater layoutInflater = LayoutInflater.from(context1);
-        //convertView = layoutInflater.inflate(layoutResource, parent, false);
+        convertView = layoutInflater.inflate(layoutResource, parent, false);
 
         // Set up the views
         TextView user = convertView.findViewById(R.id.delete1Title);
