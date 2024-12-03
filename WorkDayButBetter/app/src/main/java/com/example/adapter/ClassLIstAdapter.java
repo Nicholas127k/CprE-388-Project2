@@ -62,6 +62,7 @@ public class ClassLIstAdapter extends ArrayAdapter<Class> {
         if (classObj != null) {
             time.setText("Time: " + classObj.getName());
             user.setText("Class: " + classObj.getName());
+            classText.setText("Class: " + classObj.getName());
         }
 
         // You can add any other logic for the button click here if needed
