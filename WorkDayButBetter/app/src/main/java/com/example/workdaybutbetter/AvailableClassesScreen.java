@@ -64,12 +64,12 @@ public class AvailableClassesScreen extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
         mViewList = findViewById(R.id.classSearch);
-
+        fetchClassesFromFirebase();
         // Set up the adapter
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classList);
         mViewList.setAdapter(adapter);
 
-        fetchClassesFromFirebase();  // Fetch the classes when the activity is created
+         // Fetch the classes when the activity is created
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
