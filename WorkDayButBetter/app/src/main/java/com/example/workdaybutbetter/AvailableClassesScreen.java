@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -46,12 +47,12 @@ public class AvailableClassesScreen extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
         mViewList = findViewById(R.id.classSearch);
-
+        fetchClassesFromFirebase();
         // Set up the adapter
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classList);
         mViewList.setAdapter(adapter);
 
-        fetchClassesFromFirebase();  // Fetch the classes when the activity is created
+         // Fetch the classes when the activity is created
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +104,11 @@ public class AvailableClassesScreen extends AppCompatActivity {
 
         // Notify the adapter that the data has changed, so the ListView is updated
         adapter.notifyDataSetChanged();
+    }
+    private void initializeListAddAdapter() {
+        //FriendsAddListAdapter friendsListAdapter = new FriendsAddListAdapter(this, R.layout.listview_deleteclass, mViewList);
+        //ListView mViewList = findViewById(R.id.listView7);
+        //mViewList.setAdapter((ListAdapter) friendsListAdapter);
     }
 }
 
