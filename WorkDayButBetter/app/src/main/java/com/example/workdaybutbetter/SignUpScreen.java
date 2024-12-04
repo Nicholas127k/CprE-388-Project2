@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
@@ -101,14 +102,14 @@ public class SignUpScreen extends AppCompatActivity {
                 String password = passwordEditText.getText().toString().trim();
                 String confirmPassword = passwordConfirmEditText.getText().toString().trim();
 
-                if(!username.equals(confirmPassword)){
+                if(!password.equals(confirmPassword)){
                     passwordConfirmEditText.setError("Passwords do not match idiot");
                 }
-
                 firebaseAuthenticationInstance.createUserWithEmailAndPassword(email, password)
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                FirebaseUser userData = authResult.getUser();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
