@@ -21,19 +21,13 @@ import com.google.firebase.firestore.Query;
 
 
 public class LogInScreen extends AppCompatActivity {
-    /**
-     * @author Nicholas Kirschbaum
-     * Takes input frim edit text and uses it as Username
-     */
     private EditText usernameEditText;
-    /**
-     * @author Nicholas Kirschbaum
-     * Takes input frim edit text and user it as password
-     */
     private EditText passwordEditText;
+
     private Button loginButton;
-    private FirebaseAuth mAuth;
     private Button signInButton;
+
+    private FirebaseAuth firebaseAuthenticationInstance;
 
 
     @Override
@@ -42,12 +36,14 @@ public class LogInScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in_screen);
-        usernameEditText = findViewById(R.id.signup_username_edt);  // link to username edtext in the Signup activity XML
-        passwordEditText = findViewById(R.id.signup_password_edt);
-        loginButton = findViewById(R.id.LogInbutton);
-        signInButton = findViewById(R.id.SignInbutton);
-        signInButton = findViewById(R.id.SignInbutton);
-        mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
+
+        usernameEditText = findViewById(R.id.activity_login_screen_textedit_username);  // link to username edtext in the Signup activity XML
+        passwordEditText = findViewById(R.id.activity_login_screen_textedit_password);
+
+        loginButton = findViewById(R.id.activity_login_screen_button_login);
+        signInButton = findViewById(R.id.activity_login_screen_button_signup);
+
+        firebaseAuthenticationInstance = FirebaseAuth.getInstance();
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,18 +52,6 @@ public class LogInScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-        mAuth = FirebaseAuth.getInstance();  // Initialize FirebaseAuth
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
-                startActivity(intent);
-            }
-        });
-
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,17 +66,12 @@ public class LogInScreen extends AppCompatActivity {
                 }
 
                 // Use Firebase Authentication to sign in
-                mAuth.signInWithEmailAndPassword(email, password)
+                firebaseAuthenticationInstance.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LogInScreen.this, task -> {
                             if (task.isSuccessful()) {
-                                // Sign-in successful, go to the main activity
-                                FirebaseUser user = mAuth.getCurrentUser();  // Get the current user
-                                Intent intent = new Intent(LogInScreen.this, MainActivity.class);
-                                startActivity(intent);  // Navigate to MainActivity
-                                finish();  // Optional: Close the login activity
+                                FirebaseUser user = firebaseAuthenticationInstance.getCurrentUser();  // Get the current user
                             } else {
-                                // If sign-in fails, display a message
-                                Toast.makeText(LogInScreen.this, "Authentication failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
+                                passwordEditText.setError("Authentication Failed: Incorrect Password");
                             }
                         });
             }
