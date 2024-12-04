@@ -22,7 +22,7 @@ public class DeleteClassScreen extends AppCompatActivity {
         mViewList = findViewById(R.id.listView7);
 
         // Add a sample class to the list
-        classList.add(new Class(0, "Sample Class", 0, "Sample Teacher", null, null));
+//        classList.add(new Class(0, "Sample Class", 0, "Sample Teacher", null, null));
 
         // Initialize the adapter and set it to the ListView
         initializeListAddAdapter();

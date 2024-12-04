@@ -35,16 +35,3 @@ public class ClassFirebaseController {
 
 }
 
-class ClassFirebaseControllerSingleton{
-    private static ClassFirebaseController classFirebaseController = null;
-
-    private ClassFirebaseControllerSingleton(){}
-
-    public ClassFirebaseController getInstance(FirebaseFirestore firebaseFirestore){
-        if(classFirebaseController == null){
-            classFirebaseController = new ClassFirebaseController(firebaseFirestore);
-        }
-
-        return classFirebaseController;
-    }
-}

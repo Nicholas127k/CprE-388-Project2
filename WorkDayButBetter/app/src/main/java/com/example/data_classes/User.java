@@ -14,7 +14,7 @@ public class User {
     public static final String FIELD_CLASSES = "classes";
     public static final String FIELD_USERTYPE = "userType";
 
-    int id_;
+    String id_;
     private String username;
     private String firstname;
     private String lastname;
@@ -22,7 +22,7 @@ public class User {
     private UserType userType;
 
     public User(){
-        this.id_ = -1;
+        this.id_ = null;
         this.username = null;
         this.firstname = null;
         this.lastname = null;
@@ -30,7 +30,7 @@ public class User {
         this.userType = null;
     }
 
-    public User(int _id, String username, String firstname, String lastname, List<Class> classes, UserType userType){
+    public User(String _id, String username, String firstname, String lastname, List<Class> classes, UserType userType){
         this.id_ = _id;
         this.username = username;
         this.firstname = firstname;
@@ -45,7 +45,7 @@ public class User {
      *
      */
 
-    public int getId_() {
+    public String getId_() {
         return this.id_;
     }
 
@@ -75,7 +75,7 @@ public class User {
      *
      */
 
-    public void setId_(int id_){
+    public void setId_(String id_){
         this.id_ = id_;
     }
 

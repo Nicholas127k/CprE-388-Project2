@@ -23,18 +23,3 @@ public class UserFirebaseController {
 
 }
 
-class UserFirebaseControllerSingleton{
-
-    private static UserFirebaseController userFirebaseController = null;
-
-    private UserFirebaseControllerSingleton(){}
-
-    public UserFirebaseController getInstance(FirebaseFirestore firebaseFirestore){
-        if(userFirebaseController == null){
-            userFirebaseController = new UserFirebaseController(firebaseFirestore);
-        }
-
-        return userFirebaseController;
-    }
-
-}

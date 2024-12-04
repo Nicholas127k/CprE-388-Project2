@@ -18,13 +18,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.data_classes.User;
+import com.example.data_classes.UserType;
+import com.example.firebase_controllers.UserFirebaseControllerSingleton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SignUpScreen extends AppCompatActivity {
@@ -41,7 +46,7 @@ public class SignUpScreen extends AppCompatActivity {
     private String userTypeSelected;
 
     private FirebaseAuth firebaseAuthenticationInstance;
-    private FirebaseFirestore db;
+    private FirebaseFirestore firebaseFirestoreInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,7 @@ public class SignUpScreen extends AppCompatActivity {
         });
 
         firebaseAuthenticationInstance = FirebaseAuth.getInstance();
+        firebaseFirestoreInstance = FirebaseFirestore.getInstance();
 
         passwordEditText = findViewById(R.id.activity_signup_screen_password_edittext);
         passwordConfirmEditText = findViewById(R.id.activity_signup_screen_confirm_password_edittext);
@@ -110,6 +116,34 @@ public class SignUpScreen extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 FirebaseUser userData = authResult.getUser();
+
+                                if(userData == null){
+                                    Toast.makeText(getApplicationContext(), "User Data is null", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+
+                                UserType userType = UserType.NONE;
+                                if(userTypeSelected.equals("Student")){
+                                    userType = UserType.STUDENT;
+                                } else if(userTypeSelected.equals("Counselor")) {
+                                    userType = UserType.COUNSELOR;
+                                }
+
+                                User newUserData = new User(userData.getUid(), username, "", "", new ArrayList<>(), userType);
+                                UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).addUser(newUserData)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                finish();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                passwordConfirmEditText.setError(e.toString());
+                                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
