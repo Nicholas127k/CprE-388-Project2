@@ -5,6 +5,8 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import java.util.List;
 
 public class User {
+    public static final String COLLECTION_USER = "users";
+
     public static final String FIELD_ID = "id_";
     public static final String FIELD_USERNAME = "username";
     public static final String FIELD_FIRSTNAME = "firstname";
