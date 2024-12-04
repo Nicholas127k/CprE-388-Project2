@@ -25,10 +25,9 @@ public class LogInScreen extends AppCompatActivity {
     private EditText passwordEditText;
 
     private Button loginButton;
-    private Button signInButton;
+    private Button signUpButton;
 
     private FirebaseAuth firebaseAuthenticationInstance;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +40,14 @@ public class LogInScreen extends AppCompatActivity {
         passwordEditText = findViewById(R.id.activity_login_screen_textedit_password);
 
         loginButton = findViewById(R.id.activity_login_screen_button_login);
-        signInButton = findViewById(R.id.activity_login_screen_button_signup);
+        signUpButton = findViewById(R.id.activity_login_screen_button_signup);
 
         firebaseAuthenticationInstance = FirebaseAuth.getInstance();
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
+                Intent intent = new Intent(LogInScreen.this, SignUpScreen.class);
                 startActivity(intent);
             }
         });

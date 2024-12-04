@@ -8,4 +8,6 @@
     <color name="french_gray">#FFB5BAD0</color>
     <color name="tiffany_blue">#FF81D2C7</color>
     <color name="platinum">#FFE0E0E2</color>
+
+    <color name="edittext_background_color">#30ffffff</color>
 </resources>
