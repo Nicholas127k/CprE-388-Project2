@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.data_classes.User;
+import com.example.data_classes.UserType;
 import com.example.firebase_controllers.UserFirebaseControllerSingleton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -107,7 +108,20 @@ public class LogInScreen extends AppCompatActivity {
                                                     return;
                                                 }
 
-                                                Toast.makeText(getApplicationContext(), userData.getUsername(), Toast.LENGTH_LONG).show();
+                                                if(userData.getUserType() == UserType.NONE){
+                                                    Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_LONG).show();
+                                                }else if(userData.getUserType() == UserType.STUDENT){
+
+                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, StudentMainActivity.class);
+                                                    startActivity(userLoginSuccessIntent);
+
+                                                }else if(userData.getUserType() == UserType.COUNSELOR){
+
+                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
+                                                    startActivity(userLoginSuccessIntent);
+
+                                                }
+
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {

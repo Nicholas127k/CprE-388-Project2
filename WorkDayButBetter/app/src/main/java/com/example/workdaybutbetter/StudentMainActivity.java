@@ -5,15 +5,16 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class StudentMainActivity extends AppCompatActivity {
 
-    private Button profileButton;
-    private Button addClassButton;
-    private Button scheduleButton;
+    private AppCompatImageButton profileButton;
+    private AppCompatImageButton addClassButton;
+    private AppCompatImageButton scheduleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
