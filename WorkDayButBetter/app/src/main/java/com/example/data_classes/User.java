@@ -9,6 +9,7 @@ public class User {
 
     public static final String FIELD_ID = "id_";
     public static final String FIELD_USERNAME = "username";
+    public static final String FIELD_EMAIL = "email";
     public static final String FIELD_FIRSTNAME = "firstname";
     public static final String FIELD_LASTNAME = "lastname";
     public static final String FIELD_CLASSES = "classes";
@@ -16,6 +17,7 @@ public class User {
 
     String id_;
     private String username;
+    private String email;
     private String firstname;
     private String lastname;
     private List<Class> classes;
@@ -24,15 +26,17 @@ public class User {
     public User(){
         this.id_ = null;
         this.username = null;
+        this.email = null;
         this.firstname = null;
         this.lastname = null;
         this.classes = null;
         this.userType = null;
     }
 
-    public User(String _id, String username, String firstname, String lastname, List<Class> classes, UserType userType){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType){
         this.id_ = _id;
         this.username = username;
+        this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.classes = classes;
@@ -51,6 +55,10 @@ public class User {
 
     public String getUsername() {
         return this.username;
+    }
+
+    public String getEmail(){
+        return this.email;
     }
 
     public String getFirstname(){
@@ -81,6 +89,10 @@ public class User {
 
     public void setUsername(String username){
         this.username = username;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public void setFirstname(String firstname){

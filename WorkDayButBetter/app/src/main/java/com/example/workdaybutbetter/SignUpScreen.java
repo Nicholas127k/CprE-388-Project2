@@ -129,7 +129,7 @@ public class SignUpScreen extends AppCompatActivity {
                                     userType = UserType.COUNSELOR;
                                 }
 
-                                User newUserData = new User(userData.getUid(), username, "", "", new ArrayList<>(), userType);
+                                User newUserData = new User(userData.getUid(), username, userData.getEmail(), "", "", new ArrayList<>(), userType);
                                 UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).addUser(newUserData)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
