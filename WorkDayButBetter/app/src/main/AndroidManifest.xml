@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,21 +16,53 @@
         android:theme="@style/Theme.WorkDayButBetter"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpScreen"
+            android:name=".AdvisorMainScreen"
             android:exported="false" />
+        <activity
+            android:name=".DeleteClassScreen"
+            android:exported="false" />
+
+        <activity
+            android:name=".StudentMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_student_main"
+            android:theme="@style/Theme.WorkDayButBetter" />
+        <activity
+            android:name=".ClassScheduleScreen"
+            android:exported="false" />
+        <activity
+            android:name=".AvailableClassesScreen"
+            android:exported="false"
+            android:theme="@style/Theme.WorkDayButBetter" /> <!-- Set LogInScreen as the first screen (launcher activity) -->
+        <activity
+            android:name=".AdvisorMainScreen"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteClassScreen"
+            android:exported="false" />
+
+        <activity
+            android:name=".StudentMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_student_main"
+            android:theme="@style/Theme.WorkDayButBetter" />
+        <!-- Set LogInScreen as the first screen (launcher activity) -->
         <activity
             android:name=".LogInScreen"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.WorkDayButBetter">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- Other activities -->
+        <activity
+            android:name=".SignUpScreen"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

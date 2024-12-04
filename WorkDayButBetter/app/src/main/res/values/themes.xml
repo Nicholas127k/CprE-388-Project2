@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.WorkDayButBetter" parent="Base.Theme.WorkDayButBetter" />
+
+    <style name="Theme.WorkDayButBetter.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.WorkDayButBetter.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.WorkDayButBetter.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
