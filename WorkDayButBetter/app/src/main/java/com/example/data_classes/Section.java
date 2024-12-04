@@ -1,8 +1,12 @@
 package com.example.data_classes;
 
 import com.example.utilities.ClassSectionTimeRange;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Section {
 
@@ -135,5 +139,22 @@ public class Section {
         this.members.remove(userIndex);
 
         return SUCCESS;
+    }
+
+    public Map<String, Object> getSectionDataAsMap(){
+        Map<String, Object> sectionData = new HashMap<>();
+
+        sectionData.put(FIELD_ID, this.getId_());
+        sectionData.put(FIELD_INSTITUTIONID, this.getInstitutionId());
+        sectionData.put(FIELD_MEMBERS, this.getMembers());
+        sectionData.put(FIELD_TIME, this.getTime());
+        sectionData.put(FIELD_LABEL, this.getLabel());
+        sectionData.put(FIELD_CLASSID, this.getClassId());
+
+        return sectionData;
+    }
+
+    public Task<Void> updateSectionDataInDatabase(FirebaseFirestore firebaseFirestore){
+        return firebaseFirestore.collection(COLLECTION_SECTION).document(String.valueOf(this.getId_())).update(this.getSectionDataAsMap());
     }
 }

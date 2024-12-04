@@ -1,10 +1,18 @@
 package com.example.data_classes;
 
+import androidx.annotation.NonNull;
+
 import com.example.utilities.ClassSectionTimeRange;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Class {
 
@@ -22,8 +30,19 @@ public class Class {
 
     public static final int SUCCESS = 0;
 
+    /**
+     *
+     * The id_ is used to store the id of the class
+     *
+     */
     private int id_;
 
+    /**
+     *
+     * The institutionId is used to store the id of the institution that contains
+     * the class
+     *
+     */
     private int institutionId;
 
     /**
@@ -194,6 +213,17 @@ public class Class {
 
 
     public static final int ERROR_MEMBER_ALREADY_EXISTS_IN_SIGN_UP_QUEUE = 1;
+    /**
+     *
+     * This function adds a member to the return queue
+     *
+     * @param user The user that you want to add to the signUpQueue
+     * @return The status of the function
+     *
+     * @returnValues 1. SUCCESS
+     * @returnValues 2. ERROR_MEMBER_ALREADY_EXISTS_IN_SIGN_UP_QUEUE
+     *
+     */
     public int addMemberToSignUpQueue(User user){
         boolean memberExists = false;
         for(int i = 0; i < this.signUpQueue.size(); ++i){
@@ -213,6 +243,17 @@ public class Class {
 
 
     public static final int ERROR_MEMBER_DOES_NOT_EXIST_IN_SIGN_UP_QUEUE = 2;
+    /**
+     *
+     * This function removes a specified member from the return queue
+     *
+     * @param user The user that you want to remove from the signUpQueue
+     * @return The status of the function
+     *
+     * @returnValues 1. SUCCESS
+     * @returnValues 2. ERROR_MEMBER_DOES_NOT_EXIST_IN_SIGN_UP_QUEUE
+     *
+     */
     public int removeMemberFromSignUpQueue(User user){
         boolean memberExists = false;
         int memberIndex = 0;
@@ -230,5 +271,40 @@ public class Class {
 
         this.signUpQueue.remove(memberIndex);
         return SUCCESS;
+    }
+
+    /**
+     *
+     * This function converts the data of the class to a map
+     *
+     * @note This function is used in the updateClassInDatabase method
+     *
+     * @return The data of the class represented as a map
+     */
+    public Map<String, Object> getClassDataAsMap(){
+        Map<String, Object> classData = new HashMap<>();
+
+        classData.put(FIELD_ID, this.getId_());
+        classData.put(FIELD_INSTITUTIONID, this.getInstitutionId());
+        classData.put(FIELD_DEPARTMENT, this.getDepartment());
+        classData.put(FIELD_CODE, this.getCode());
+        classData.put(FIELD_NAME, this.getName());
+        classData.put(FIELD_DESCRIPTION, this.getDescription());
+        classData.put(FIELD_SECTIONBUCKETS, this.getSectionBuckets());
+        classData.put(FIELD_CLASSMEMBERS, this.getClassMembers());
+        classData.put(FIELD_SIGNUPQUEUE, this.getSignUpQueue());
+
+        return classData;
+    }
+
+    /**
+     *
+     * This function updates the database with the current class data
+     *
+     * @param firebaseFirestore The firebase firestore instance
+     * @return The task of the database transaction
+     */
+    public Task<Void> updateClassInDatabase(FirebaseFirestore firebaseFirestore){
+        return firebaseFirestore.collection(COLLECTION_CLASS).document(String.valueOf(this.getId_())).update(this.getClassDataAsMap());
     }
 }
