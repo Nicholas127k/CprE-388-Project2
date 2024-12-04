@@ -7,7 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Class {
+
+    public static final String COLLECTION_CLASS = "classes";
+
     public static final String FIELD_ID = "id_";
+    public static final String FIELD_INSTITUTIONID = "institutionId";
     public static final String FIELD_DEPARTMENT = "department";
     public static final String FIELD_CODE = "code";
     public static final String FIELD_NAME = "name";
@@ -19,6 +23,8 @@ public class Class {
     public static final int SUCCESS = 0;
 
     private int id_;
+
+    private int institutionId;
 
     /**
      *
@@ -86,6 +92,7 @@ public class Class {
 
     public Class() {
         this.id_ = -1;
+        this.institutionId = -1;
         this.department = null;
         this.code = -1;
         this.name = null;
@@ -95,8 +102,9 @@ public class Class {
         this.signUpQueue = new ArrayList<>();
     }
 
-    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue) {
+    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId) {
         this.id_ = _id;
+        this.institutionId = institutionId;
         this.department = department;
         this.name = name;
         this.description = description;
@@ -115,6 +123,10 @@ public class Class {
 
     public int getId_(){
         return this.id_;
+    }
+
+    public int getInstitutionId(){
+        return this.institutionId;
     }
 
     public String getDepartment(){
@@ -154,6 +166,10 @@ public class Class {
 
     public void setId_(int _id){
         this.id_ = _id;
+    }
+
+    public void setInstitutionId(int _id){
+        this.institutionId = _id;
     }
 
     public void setDepartment(String department){
