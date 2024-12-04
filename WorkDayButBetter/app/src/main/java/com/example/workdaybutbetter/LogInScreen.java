@@ -63,7 +63,7 @@ public class LogInScreen extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LogInScreen.this, SignUpScreen.class);
+                Intent intent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
                 startActivity(intent);
             }
         });
