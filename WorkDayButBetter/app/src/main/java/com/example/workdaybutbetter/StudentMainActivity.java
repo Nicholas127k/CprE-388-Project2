@@ -1,6 +1,8 @@
 package com.example.workdaybutbetter;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -30,5 +32,13 @@ public class StudentMainActivity extends AppCompatActivity {
         profileButton = findViewById(R.id.activity_student_main_navigation_profile_button);
         addClassButton = findViewById(R.id.activity_student_main_navigation_add_class_button);
         scheduleButton = findViewById(R.id.activity_student_main_navigation_schedule_button);
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toUserProfileIntent = new Intent(StudentMainActivity.this, UserProfileActivity.class);
+                startActivity(toUserProfileIntent);
+            }
+        });
     }
 }

@@ -110,4 +110,25 @@ public class User {
     public void setUserType(UserType userType){
         this.userType = userType;
     }
+
+
+    public void copy(User user){
+        this.id_ = user.getId_();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
+        this.classes = user.getClasses();
+        this.userType = user.getUserType();
+    }
+
+    public void clear(){
+        this.id_ = null;
+        this.email = null;
+        this.username = null;
+        this.firstname = null;
+        this.lastname = null;
+        this.classes = null;
+        this.userType = null;
+    }
 }

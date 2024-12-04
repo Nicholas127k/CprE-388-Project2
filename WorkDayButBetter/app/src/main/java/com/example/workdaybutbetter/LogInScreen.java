@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.application_data.UserDataSingleton;
 import com.example.data_classes.User;
 import com.example.data_classes.UserType;
 import com.example.firebase_controllers.UserFirebaseControllerSingleton;
@@ -107,6 +108,8 @@ public class LogInScreen extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "Error while converting user data", Toast.LENGTH_LONG).show();
                                                     return;
                                                 }
+
+                                                UserDataSingleton.setInstance(userData);
 
                                                 if(userData.getUserType() == UserType.NONE){
                                                     Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_LONG).show();
