@@ -17,7 +17,7 @@ public class UserFirebaseController {
         return firebaseFirestore.collection(User.COLLECTION_USER).document(String.valueOf(user.getId_())).set(user);
     }
 
-    public Task<QuerySnapshot> getUserFromId(int _id){
+    public Task<QuerySnapshot> getUserFromId(String _id){
         return firebaseFirestore.collection(User.COLLECTION_USER).whereEqualTo(User.FIELD_ID, _id).get();
     }
 

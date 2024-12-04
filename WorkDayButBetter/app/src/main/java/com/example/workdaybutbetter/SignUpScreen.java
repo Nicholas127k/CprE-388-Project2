@@ -152,45 +152,6 @@ public class SignUpScreen extends AppCompatActivity {
 
                             }
                         });
-
-                /* when login button is pressed, use intent to switch to Login Activity */
-//                if(password.equals(confirmPassword)) {
-//                    mAuth.createUserWithEmailAndPassword(email, password)
-//                            .addOnCompleteListener(SignUpScreen.this, task -> {
-//                                if (task.isSuccessful()) {
-//                                    // User created successfully, save user details in Firestore
-//                                    FirebaseUser user = mAuth.getCurrentUser();
-//                                    if (user != null) {
-//                                        // Example: Store additional user data in Firestore (like username)
-//                                        String username = username1.split("@")[0];  // Simple username from email
-//                                        Random random = new Random();
-//                                        int randomNumber = random.nextInt();
-//                                        // Create a user object
-//                                        User newUser = new User(username, email, 0, randomNumber);
-//
-//                                        // Save user data in Firestore
-//                                        db.collection("users")
-//                                                .document(user.getUid())
-//                                                .set(newUser)
-//                                                .addOnSuccessListener(aVoid -> {
-//                                                    // Navigate to the login screen after successful sign up
-//                                                    Intent intent = new Intent(SignUpScreen.this, LogInScreen.class);
-//                                                    startActivity(intent);
-//                                                    finish();
-//                                                })
-//                                                .addOnFailureListener(e -> {
-//                                                    // Handle Firestore failure
-//                                                    Toast.makeText(SignUpScreen.this, "Error saving user data.", Toast.LENGTH_SHORT).show();
-//                                                });
-//                                    }
-//                                }
-//                            });
-//
-//
-//                }
-//                else{
-//                    textView2.setVisibility(View.VISIBLE);
-//                }
             }
         });
     }
