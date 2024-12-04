@@ -5,5 +5,10 @@
         <attr name="icon" format="reference"/>
         <attr name="hint" format="string"/>
     </declare-styleable>
+
+    <string-array name="usertype">
+        <item>Student</item>
+        <item>Counselor</item>
+    </string-array>
     
 </resources>
