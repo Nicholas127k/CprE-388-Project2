@@ -120,7 +120,7 @@ public class LogInScreen extends AppCompatActivity {
 
                                                 }else if(userData.getUserType() == UserType.COUNSELOR){
 
-                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
+                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, CreateClassActivity.class);
                                                     startActivity(userLoginSuccessIntent);
 
                                                 }

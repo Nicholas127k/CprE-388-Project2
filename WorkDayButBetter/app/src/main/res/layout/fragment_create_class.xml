@@ -1,201 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/lapis_lazuli"
-    android:gravity="center">
 
+    android:id="@+id/fragment_create_class_layout"
+    >
 
     <LinearLayout
-        android:id="@+id/activity_signup_screen_edittext_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:padding="12dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-
-        android:background="@drawable/activity_signup_screen_edittext_layout_background"
-
-        app:layout_constraintTop_toBottomOf="@id/activity_signup_screen_title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/activity_signup_screen_signup_button"
+        android:background="@color/lapis_lazuli"
+        android:gravity="center"
         >
 
+
         <LinearLayout
+            android:id="@+id/activity_signup_screen_edittext_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
             android:orientation="vertical"
 
-            android:layout_marginVertical="10dp"
+            android:background="@drawable/activity_signup_screen_edittext_layout_background"
+
+            app:layout_constraintTop_toBottomOf="@id/activity_signup_screen_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/activity_signup_screen_signup_button"
             >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Class Name"
-                android:textColor="@color/white"
-                android:textSize="8pt"
-                />
-
-            <EditText
-                android:id="@+id/createName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
 
-                android:hint="Class"
-                android:padding="10dp"
-                android:textColorHint="@color/white"
+                android:layout_marginVertical="10dp"
+                >
 
-                android:background="@drawable/activity_signup_screen_edittext_background"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Class Name"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    />
+
+                <EditText
+                    android:id="@+id/createName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Class"
+                    android:padding="10dp"
+                    android:textColorHint="@color/white"
+
+                    android:background="@drawable/activity_signup_screen_edittext_background"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginVertical="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Number"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    />
+
+                <EditText
+                    android:id="@+id/createNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Number"
+                    android:padding="10dp"
+                    android:textColorHint="@color/white"
+
+                    android:background="@drawable/activity_signup_screen_edittext_background"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginVertical="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Department"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    />
+
+                <Spinner
+                    android:id="@+id/createDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+
+                    android:background="@drawable/activity_signup_screen_edittext_background"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginVertical="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Description"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    />
+
+                <EditText
+                    android:id="@+id/createDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Description"
+                    android:padding="10dp"
+                    android:textColorHint="@color/white"
+
+                    android:background="@drawable/activity_signup_screen_edittext_background"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:layout_marginVertical="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Time"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    />
+
+                <EditText
+                    android:id="@+id/createTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Time"
+                    android:padding="10dp"
+                    android:textColorHint="@color/white"
+
+                    android:background="@drawable/activity_signup_screen_edittext_background"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/createClass"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
 
-            android:layout_marginVertical="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Number"
-                android:textColor="@color/white"
-                android:textSize="8pt"
-                />
-
-            <EditText
-                android:id="@+id/createNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:hint="Number"
-                android:padding="10dp"
-                android:textColorHint="@color/white"
-
-                android:background="@drawable/activity_signup_screen_edittext_background"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            android:layout_marginVertical="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Department"
-                android:textColor="@color/white"
-                android:textSize="8pt"
-                />
-
-            <Spinner
-                android:id="@+id/createDepartment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                android:padding="10dp"
-                android:textColor="@color/white"
-
-                android:background="@drawable/activity_signup_screen_edittext_background"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            android:layout_marginVertical="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Description"
-                android:textColor="@color/white"
-                android:textSize="8pt"
-                />
-
-            <EditText
-                android:id="@+id/createDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:hint="Description"
-                android:padding="10dp"
-                android:textColorHint="@color/white"
-
-                android:background="@drawable/activity_signup_screen_edittext_background"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            android:layout_marginVertical="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Time"
-                android:textColor="@color/white"
-                android:textSize="8pt"
-                />
-
-            <EditText
-                android:id="@+id/createTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:hint="Time"
-                android:padding="10dp"
-                android:textColorHint="@color/white"
-
-                android:background="@drawable/activity_signup_screen_edittext_background"
-                />
-
-        </LinearLayout>
+            android:background="@drawable/activity_signup_screen_signup_button_background"
+            android:text="Create Class"
+            android:textColor="@color/white"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_signup_screen_edittext_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createClass"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
 
-        android:background="@drawable/activity_signup_screen_signup_button_background"
-        android:text="Create Class"
-        android:textColor="@color/white"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_signup_screen_edittext_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
