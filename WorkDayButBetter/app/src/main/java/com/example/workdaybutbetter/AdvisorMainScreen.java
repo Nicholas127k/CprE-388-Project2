@@ -1,6 +1,8 @@
 package com.example.workdaybutbetter;
 
 import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.adapter.TabAdapter;
