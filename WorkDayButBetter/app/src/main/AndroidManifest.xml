@@ -19,6 +19,9 @@
             android:name=".CreateInstitutionActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateClassActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdvisorMainScreenActivity"
             android:exported="false" />
         <activity
@@ -27,14 +30,6 @@
         <activity
             android:name=".DeleteClassScreen"
             android:exported="false" />
-        <activity
-            android:name=".DeleteClassScreen"
-            android:exported="false" />
-        <activity
-            android:name=".StudentMainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_student_main"
-            android:theme="@style/Theme.WorkDayButBetter" />
         <activity
             android:name=".StudentMainActivity"
             android:exported="false"
