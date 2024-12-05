@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -20,14 +21,17 @@ import com.example.workdaybutbetter.views.AddClassSectionDialogFragment;
 
 public class CreateClassActivity extends AppCompatActivity {
 
-    private EditText createName;
-    private EditText createNumber;
-    private EditText createDescription;
-    private EditText createTime;
-    private Button create;
+    private EditText classNameEditText;
+    private EditText classNumberEditText;
+    private EditText classDescriptionEditText;
+
+    private Button createClassButton;
+    private AppCompatImageButton backButton;
+
     private Spinner departmentSpinner;
     private ArrayAdapter<CharSequence> departmentSpinnerAdapter;
     private String selectedDepartment;
+
     private AddClassSectionDialogFragment addClassSectionDialogFragment;
 
     @Override
@@ -42,12 +46,20 @@ public class CreateClassActivity extends AppCompatActivity {
         });
 
         // Initialize the EditTexts and other views
-        createName = findViewById(R.id.createName);
-        createNumber = findViewById(R.id.createNumber);
-        createDescription = findViewById(R.id.createDescription);
-        createTime  = findViewById(R.id.createTime);
-        create = findViewById(R.id.createClass);
-        departmentSpinner = findViewById(R.id.createDepartment);
+        classNameEditText = findViewById(R.id.fragment_create_class_classname_edittext);
+        classNumberEditText = findViewById(R.id.fragment_create_class_classnumber_edittext);
+        classDescriptionEditText = findViewById(R.id.fragment_create_class_description_edittext);
+
+        createClassButton = findViewById(R.id.fragment_create_class_create_class_button);
+        backButton = findViewById(R.id.fragment_create_class_navigation_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        departmentSpinner = findViewById(R.id.fragment_create_class_department_spinner);
 
         addClassSectionDialogFragment = new AddClassSectionDialogFragment();
 
@@ -76,7 +88,7 @@ public class CreateClassActivity extends AppCompatActivity {
             }
         });
 
-        create.setOnClickListener(new View.OnClickListener() {
+        createClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addClassSectionDialogFragment.show(getSupportFragmentManager(), AddClassSectionDialogFragment.TAG);

@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.workdaybutbetter.AdvisorMainScreenFragment;
 import com.example.workdaybutbetter.ControlFragment;
-import com.example.workdaybutbetter.CreateClassFragment;
 
 public class TabAdapter extends FragmentStateAdapter {
 
@@ -21,8 +20,6 @@ public class TabAdapter extends FragmentStateAdapter {
         switch (position) {
             case 0:
                 return new AdvisorMainScreenFragment();
-            case 1:
-                return new CreateClassFragment();
             case 2:
                 return new ControlFragment();
             default:
