@@ -29,6 +29,9 @@ import java.util.List;
 
 public class JoinInstitutionDialogFragment extends DialogFragment {
 
+    public static final int SUCCESS = 1;
+    public static final int FAILURE = 0;
+
     private EditText joinCodeEditText;
 
     private FirebaseFirestore firebaseFirestoreInstance;
@@ -36,7 +39,7 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
     private JoinInstitutionDialogFragmentRefreshListener joinInstitutionDialogFragmentRefreshListener;
 
     public interface JoinInstitutionDialogFragmentRefreshListener{
-        public void onInstitutionRefresh(Institution institution);
+        public void onInstitutionRefresh(Institution institution, int status, String errorMessage);
     }
 
     public void setInstitutionRefreshListener(JoinInstitutionDialogFragmentRefreshListener joinInstitutionDialogFragmentRefreshListener){
@@ -68,7 +71,7 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
                             public void onSuccess(QuerySnapshot documentSnapshots) {
                                 List<DocumentSnapshot> institutionDocuments = documentSnapshots.getDocuments();
                                 if(institutionDocuments.isEmpty()){
-                                    Toast.makeText(getContext(), "Invalid Join Code", Toast.LENGTH_LONG).show();
+                                    joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance(), FAILURE, "Invalid Join Code");
                                     return;
                                 }
 
@@ -76,7 +79,7 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
                                 Institution userInstitution = institutionDocument.toObject(Institution.class);
 
                                 if(userInstitution == null){
-                                    Toast.makeText(getContext(), "Error converting institution", Toast.LENGTH_LONG).show();
+                                    joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance(), FAILURE, "Error Converting Institution");
                                     return;
                                 }
 
@@ -86,14 +89,14 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
                                             public void onSuccess(Void unused) {
                                                 UserDataSingleton.getInstance().setInstitutionId(userInstitution.getId_());
                                                 UserInstitutionSingleton.setInstance(userInstitution);
-                                                joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance());
+                                                joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance(), SUCCESS, "");
                                                 dismiss();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                                joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance(), FAILURE, e.toString());
                                             }
                                         });
                             }
@@ -101,7 +104,7 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                joinInstitutionDialogFragmentRefreshListener.onInstitutionRefresh(UserInstitutionSingleton.getInstance(), FAILURE, e.toString());
                             }
                         });
             }

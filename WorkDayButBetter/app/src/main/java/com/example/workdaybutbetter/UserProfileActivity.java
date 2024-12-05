@@ -58,7 +58,13 @@ public class UserProfileActivity extends AppCompatActivity {
         joinInstitutionDialogFragment = new JoinInstitutionDialogFragment();
         joinInstitutionDialogFragment.setInstitutionRefreshListener(new JoinInstitutionDialogFragment.JoinInstitutionDialogFragmentRefreshListener() {
             @Override
-            public void onInstitutionRefresh(Institution institution) {
+            public void onInstitutionRefresh(Institution institution, int status, String errorMessage) {
+
+                if(status == JoinInstitutionDialogFragment.FAILURE){
+                    Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if(institution.getId_() == -1){
                     institutionText.setText("Institution:    None");
                 }else{
