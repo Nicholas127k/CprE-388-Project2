@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.workdaybutbetter.AdvisorMainScreen;
 import com.example.workdaybutbetter.AdvisorMainScreenFragment;
 import com.example.workdaybutbetter.ControlFragment;
 import com.example.workdaybutbetter.CreateClassFragment;

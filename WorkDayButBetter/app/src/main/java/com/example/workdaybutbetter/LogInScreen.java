@@ -49,6 +49,11 @@ public class LogInScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in_screen);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_login_screen_layout), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         usernameEditText = findViewById(R.id.activity_login_screen_textedit_username);  // link to username edtext in the Signup activity XML
         passwordEditText = findViewById(R.id.activity_login_screen_textedit_password);
@@ -120,7 +125,7 @@ public class LogInScreen extends AppCompatActivity {
 
                                                 }else if(userData.getUserType() == UserType.COUNSELOR){
 
-                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, AdvisorMainScreen.class);
+                                                    Intent userLoginSuccessIntent = new Intent(LogInScreen.this, AdvisorMainScreenActivity.class);
                                                     startActivity(userLoginSuccessIntent);
 
                                                 }
