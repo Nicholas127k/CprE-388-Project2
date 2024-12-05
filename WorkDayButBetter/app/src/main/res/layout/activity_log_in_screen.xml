@@ -91,6 +91,19 @@
             android:layout_marginVertical="12dp"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activity_login_screen_button_create_institution"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:text="Create Institution"
+            android:textSize="8pt"
+            android:textColor="@color/black"
+            android:background="@drawable/activity_login_screen_button_background"
+
+            android:layout_marginVertical="12dp"
+            />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

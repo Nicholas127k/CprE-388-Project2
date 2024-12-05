@@ -10,13 +10,18 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.application_data.UserDataSingleton;
+import com.example.application_data.UserInstitutionSingleton;
+import com.example.data_classes.Institution;
 import com.example.data_classes.User;
 import com.example.data_classes.UserType;
+import com.example.firebase_controllers.InstitutionFirebaseController;
+import com.example.firebase_controllers.InstitutionFirebaseControllerSingleton;
 import com.example.firebase_controllers.UserFirebaseControllerSingleton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +45,7 @@ public class LogInScreen extends AppCompatActivity {
 
     private Button loginButton;
     private Button signUpButton;
+    private AppCompatButton createInstitutionButton;
 
     private FirebaseAuth firebaseAuthenticationInstance;
     private FirebaseFirestore firebaseFirestoreInstance;
@@ -60,6 +66,7 @@ public class LogInScreen extends AppCompatActivity {
 
         loginButton = findViewById(R.id.activity_login_screen_button_login);
         signUpButton = findViewById(R.id.activity_login_screen_button_signup);
+        createInstitutionButton = findViewById(R.id.activity_login_screen_button_create_institution);
 
         firebaseAuthenticationInstance = FirebaseAuth.getInstance();
         firebaseFirestoreInstance = FirebaseFirestore.getInstance();
@@ -69,6 +76,14 @@ public class LogInScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LogInScreen.this, SignUpScreen.class);
                 startActivity(intent);
+            }
+        });
+
+        createInstitutionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toCreateInstitutionIntent = new Intent(LogInScreen.this, CreateInstitutionActivity.class);
+                startActivity(toCreateInstitutionIntent);
             }
         });
 
@@ -130,14 +145,47 @@ public class LogInScreen extends AppCompatActivity {
 
                                                 }
 
+                                                int userInstitutionId = UserDataSingleton.getInstance().getInstitutionId();
+                                                if(userInstitutionId != Institution.DEFAULT_ID){
+                                                    InstitutionFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).getInstitutionFromId(userInstitutionId)
+                                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                                @Override
+                                                                public void onSuccess(QuerySnapshot documentSnapshots) {
+
+                                                                    List<DocumentSnapshot> institutionDocuments = documentSnapshots.getDocuments();
+                                                                    if(institutionDocuments.isEmpty()){
+                                                                        Toast.makeText(getApplicationContext(), "No Institution Found", Toast.LENGTH_LONG).show();
+                                                                        return;
+                                                                    }
+
+                                                                    DocumentSnapshot userInstitutionDocument = institutionDocuments.get(0);
+                                                                    Institution userInstitution = userInstitutionDocument.toObject(Institution.class);
+
+                                                                    if(userInstitution == null){
+                                                                        Toast.makeText(getApplicationContext(), "Error while converting institution", Toast.LENGTH_LONG).show();
+                                                                        return;
+                                                                    }
+
+                                                                    UserInstitutionSingleton.setInstance(userInstitution);
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                                                }
+                                                            });
+                                                }
+
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-
+                                                passwordEditText.setError(e.toString());
                                             }
                                         });
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

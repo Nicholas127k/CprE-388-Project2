@@ -14,6 +14,7 @@ public class User {
     public static final String FIELD_LASTNAME = "lastname";
     public static final String FIELD_CLASSES = "classes";
     public static final String FIELD_USERTYPE = "userType";
+    private static final String FIELD_INSTITUTIONID = "institutionId";
 
     String id_;
     private String username;
@@ -22,6 +23,7 @@ public class User {
     private String lastname;
     private List<Class> classes;
     private UserType userType;
+    private int institutionId;
 
     public User(){
         this.id_ = null;
@@ -31,9 +33,10 @@ public class User {
         this.lastname = null;
         this.classes = null;
         this.userType = null;
+        this.institutionId = -1;
     }
 
-    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId){
         this.id_ = _id;
         this.username = username;
         this.email = email;
@@ -41,6 +44,7 @@ public class User {
         this.lastname = lastname;
         this.classes = classes;
         this.userType = userType;
+        this.institutionId = institutionId;
     }
 
     /**
@@ -77,6 +81,10 @@ public class User {
         return this.userType;
     }
 
+    public int getInstitutionId(){
+        return this.institutionId;
+    }
+
     /**
      *
      * Setters
@@ -111,6 +119,10 @@ public class User {
         this.userType = userType;
     }
 
+    public void setInstitutionId(int institutionId){
+        this.institutionId = institutionId;
+    }
+
 
     public void copy(User user){
         this.id_ = user.getId_();
@@ -120,6 +132,7 @@ public class User {
         this.lastname = user.getLastname();
         this.classes = user.getClasses();
         this.userType = user.getUserType();
+        this.institutionId = user.getInstitutionId();
     }
 
     public void clear(){
@@ -130,5 +143,6 @@ public class User {
         this.lastname = null;
         this.classes = null;
         this.userType = null;
+        this.institutionId = -1;
     }
 }

@@ -17,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.application_data.UserDataSingleton;
+import com.example.application_data.UserInstitutionSingleton;
+import com.example.data_classes.Institution;
 import com.example.data_classes.User;
 import com.example.data_classes.UserType;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView firstnameText;
     private TextView lastnameText;
     private TextView userTypeText;
+    private TextView institutionText;
 
     private FirebaseAuth firebaseAuthenticationInstance;
 
@@ -77,6 +80,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
 
                 UserDataSingleton.getInstance().clear();
+                UserInstitutionSingleton.getInstance().clear();
 
                 Intent toApplicationLoginScreen = new Intent(UserProfileActivity.this, LogInScreen.class);
                 startActivity(toApplicationLoginScreen);
@@ -88,14 +92,22 @@ public class UserProfileActivity extends AppCompatActivity {
         firstnameText = findViewById(R.id.activity_user_profile_firstname_text);
         lastnameText = findViewById(R.id.activity_user_profile_lastname_text);
         userTypeText = findViewById(R.id.activity_user_profile_usertype_text);
+        institutionText = findViewById(R.id.activity_user_profile_institution_text);
 
         User userData = UserDataSingleton.getInstance();
+        Institution institution = UserInstitutionSingleton.getInstance();
 
         usernameText.setText("Username:  " + userData.getUsername());
         emailText.setText("Email:   " + userData.getEmail());
         firstnameText.setText("Firstname:   " + userData.getFirstname());
         lastnameText.setText("Lastname:   " + userData.getLastname());
         userTypeText.setText("User Type:   " + userData.getUserType().toString());
+
+        if(institution.getId_() == -1){
+            institutionText.setText("Institution:    None");
+        }else{
+            institutionText.setText("Institution:    "+institution.getInstitutionName());
+        }
 
     }
 }

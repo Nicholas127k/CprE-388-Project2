@@ -16,6 +16,9 @@
         android:theme="@style/Theme.WorkDayButBetter"
         tools:targetApi="31">
         <activity
+            android:name=".CreateInstitutionActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdvisorMainScreenActivity"
             android:exported="false" />
         <activity
