@@ -50,5 +50,13 @@ public class AdvisorMainScreenActivity extends AppCompatActivity {
         createAClassButton = findViewById(R.id.activity_advisor_main_screen_add_class_button_layout);
         removeAClassButton = findViewById(R.id.activity_advisor_main_screen_remove_class_button_layout);
 
+        createAClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toCreateAClassIntent = new Intent(AdvisorMainScreenActivity.this, CreateClassActivity.class);
+                startActivity(toCreateAClassIntent);
+            }
+        });
+
     }
 }
