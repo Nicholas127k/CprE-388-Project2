@@ -145,4 +145,8 @@ public class User {
         this.userType = null;
         this.institutionId = -1;
     }
+
+    public User duplicate(){
+        return new User(this.id_, this.username, this.email, this.firstname, this.lastname, this.classes, this.userType, this.institutionId);
+    }
 }

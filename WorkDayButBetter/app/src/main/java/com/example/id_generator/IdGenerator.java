@@ -16,7 +16,7 @@ public class IdGenerator {
 
     public static int generateId(long seed){
         if(randomGenerator == null){
-            randomGenerator = new Random(seed);
+            randomGenerator = new Random();
         }
 
         return randomGenerator.nextInt(MAX_ID);

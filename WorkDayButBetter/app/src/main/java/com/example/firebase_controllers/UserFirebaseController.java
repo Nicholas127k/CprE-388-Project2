@@ -1,5 +1,6 @@
 package com.example.firebase_controllers;
 
+import com.example.data_classes.Institution;
 import com.example.data_classes.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,6 +20,12 @@ public class UserFirebaseController {
 
     public Task<QuerySnapshot> getUserFromId(String _id){
         return firebaseFirestore.collection(User.COLLECTION_USER).whereEqualTo(User.FIELD_ID, _id).get();
+    }
+
+    public Task<Void> joinInstitution(User user, Institution institution){
+        User newInstitutionUser = user.duplicate();
+        newInstitutionUser.setInstitutionId(institution.getId_());
+        return this.firebaseFirestore.collection(User.COLLECTION_USER).document(String.valueOf(newInstitutionUser.getId_())).set(newInstitutionUser);
     }
 
 }
