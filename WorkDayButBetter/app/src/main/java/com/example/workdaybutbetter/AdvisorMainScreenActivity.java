@@ -3,6 +3,7 @@ package com.example.workdaybutbetter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AdvisorMainScreenActivity extends AppCompatActivity {
 
     private AppCompatImageButton profileButton;
+    private LinearLayout createAClassButton;
+    private LinearLayout removeAClassButton;
 
     private FirebaseAuth firebaseAuthenticationInstance;
     private FirebaseFirestore firebaseFirestoreInstance;
@@ -43,6 +46,9 @@ public class AdvisorMainScreenActivity extends AppCompatActivity {
                 startActivity(toProfileScreenIntent);
             }
         });
+
+        createAClassButton = findViewById(R.id.activity_advisor_main_screen_add_class_button_layout);
+        removeAClassButton = findViewById(R.id.activity_advisor_main_screen_remove_class_button_layout);
 
     }
 }

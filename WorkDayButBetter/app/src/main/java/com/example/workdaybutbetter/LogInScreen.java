@@ -23,6 +23,7 @@ import com.example.data_classes.UserType;
 import com.example.firebase_controllers.InstitutionFirebaseController;
 import com.example.firebase_controllers.InstitutionFirebaseControllerSingleton;
 import com.example.firebase_controllers.UserFirebaseControllerSingleton;
+import com.example.workdaybutbetter.views.LoadingDialogFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -50,6 +51,8 @@ public class LogInScreen extends AppCompatActivity {
     private FirebaseAuth firebaseAuthenticationInstance;
     private FirebaseFirestore firebaseFirestoreInstance;
 
+    private LoadingDialogFragment loadingDialogFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,8 @@ public class LogInScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        loadingDialogFragment = new LoadingDialogFragment();
 
         usernameEditText = findViewById(R.id.activity_login_screen_textedit_username);  // link to username edtext in the Signup activity XML
         passwordEditText = findViewById(R.id.activity_login_screen_textedit_password);
@@ -90,11 +95,14 @@ public class LogInScreen extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+
                 String email = usernameEditText.getText().toString().trim();  // Get username (email)
                 String password = passwordEditText.getText().toString().trim();  // Get password
 
                 // Check if username or password is empty
                 if (email.isEmpty() || password.isEmpty()) {
+                    loadingDialogFragment.dismiss();
                     Toast.makeText(LogInScreen.this, "Please enter both username and password", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -107,6 +115,7 @@ public class LogInScreen extends AppCompatActivity {
                                 FirebaseUser firebaseUser = authResult.getUser();
 
                                 if(firebaseUser == null){
+                                    loadingDialogFragment.dismiss();
                                     Toast.makeText(getApplicationContext(), "User information is null", Toast.LENGTH_LONG).show();
                                     return;
                                 }
@@ -117,6 +126,7 @@ public class LogInScreen extends AppCompatActivity {
                                             public void onSuccess(QuerySnapshot documentSnapshots) {
                                                 List<DocumentSnapshot> userDataDocuments = documentSnapshots.getDocuments();
                                                 if(userDataDocuments.isEmpty()){
+                                                    loadingDialogFragment.dismiss();
                                                     Toast.makeText(getApplicationContext(), "Unable to find user information", Toast.LENGTH_LONG).show();
                                                     return;
                                                 }
@@ -125,6 +135,7 @@ public class LogInScreen extends AppCompatActivity {
                                                 User userData = userDataDocument.toObject(User.class);
 
                                                 if(userData == null){
+                                                    loadingDialogFragment.dismiss();
                                                     Toast.makeText(getApplicationContext(), "Error while converting user data", Toast.LENGTH_LONG).show();
                                                     return;
                                                 }
@@ -132,14 +143,15 @@ public class LogInScreen extends AppCompatActivity {
                                                 UserDataSingleton.setInstance(userData);
 
                                                 if(userData.getUserType() == UserType.NONE){
+                                                    loadingDialogFragment.dismiss();
                                                     Toast.makeText(getApplicationContext(), "Unknown user type", Toast.LENGTH_LONG).show();
                                                 }else if(userData.getUserType() == UserType.STUDENT){
-
+                                                    loadingDialogFragment.dismiss();
                                                     Intent userLoginSuccessIntent = new Intent(LogInScreen.this, StudentMainActivity.class);
                                                     startActivity(userLoginSuccessIntent);
 
                                                 }else if(userData.getUserType() == UserType.COUNSELOR){
-
+                                                    loadingDialogFragment.dismiss();
                                                     Intent userLoginSuccessIntent = new Intent(LogInScreen.this, AdvisorMainScreenActivity.class);
                                                     startActivity(userLoginSuccessIntent);
 
@@ -154,6 +166,7 @@ public class LogInScreen extends AppCompatActivity {
 
                                                                     List<DocumentSnapshot> institutionDocuments = documentSnapshots.getDocuments();
                                                                     if(institutionDocuments.isEmpty()){
+                                                                        loadingDialogFragment.dismiss();
                                                                         Toast.makeText(getApplicationContext(), "No Institution Found", Toast.LENGTH_LONG).show();
                                                                         return;
                                                                     }
@@ -162,6 +175,7 @@ public class LogInScreen extends AppCompatActivity {
                                                                     Institution userInstitution = userInstitutionDocument.toObject(Institution.class);
 
                                                                     if(userInstitution == null){
+                                                                        loadingDialogFragment.dismiss();
                                                                         Toast.makeText(getApplicationContext(), "Error while converting institution", Toast.LENGTH_LONG).show();
                                                                         return;
                                                                     }
@@ -172,16 +186,18 @@ public class LogInScreen extends AppCompatActivity {
                                                             .addOnFailureListener(new OnFailureListener() {
                                                                 @Override
                                                                 public void onFailure(@NonNull Exception e) {
+                                                                    loadingDialogFragment.dismiss();
                                                                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                                                                 }
                                                             });
+                                                    loadingDialogFragment.dismiss();
                                                 }
-
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                loadingDialogFragment.dismiss();
                                                 passwordEditText.setError(e.toString());
                                             }
                                         });
@@ -191,9 +207,11 @@ public class LogInScreen extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                loadingDialogFragment.dismiss();
                                 passwordEditText.setError(e.toString());
                             }
                         });
+
             }
         });
 
