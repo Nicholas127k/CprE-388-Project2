@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,6 +19,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.data_classes.Section;
 import com.example.workdaybutbetter.views.AddClassSectionDialogFragment;
+import com.example.workdaybutbetter.views.ViewSectionsDialogFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateClassActivity extends AppCompatActivity {
 
@@ -27,12 +32,17 @@ public class CreateClassActivity extends AppCompatActivity {
 
     private Button createClassButton;
     private AppCompatImageButton backButton;
+    private AppCompatButton addSectionButton;
+    private AppCompatButton viewSectionsButton;
 
     private Spinner departmentSpinner;
     private ArrayAdapter<CharSequence> departmentSpinnerAdapter;
     private String selectedDepartment;
 
     private AddClassSectionDialogFragment addClassSectionDialogFragment;
+    private ViewSectionsDialogFragment viewSectionsDialogFragment;
+
+    private List<Section> sectionsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +55,15 @@ public class CreateClassActivity extends AppCompatActivity {
             return insets;
         });
 
+        sectionsList = new ArrayList<>();
+
         // Initialize the EditTexts and other views
         classNameEditText = findViewById(R.id.fragment_create_class_classname_edittext);
         classNumberEditText = findViewById(R.id.fragment_create_class_classnumber_edittext);
         classDescriptionEditText = findViewById(R.id.fragment_create_class_description_edittext);
 
+        viewSectionsButton = findViewById(R.id.fragment_create_class_view_sections_button);
+        addSectionButton = findViewById(R.id.fragment_create_class_add_section_button);
         createClassButton = findViewById(R.id.fragment_create_class_create_class_button);
         backButton = findViewById(R.id.fragment_create_class_navigation_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +76,7 @@ public class CreateClassActivity extends AppCompatActivity {
         departmentSpinner = findViewById(R.id.fragment_create_class_department_spinner);
 
         addClassSectionDialogFragment = new AddClassSectionDialogFragment();
+        viewSectionsDialogFragment = new ViewSectionsDialogFragment();
 
         // Set up the adapter for the department spinner
         departmentSpinnerAdapter = ArrayAdapter.createFromResource(
@@ -91,14 +106,28 @@ public class CreateClassActivity extends AppCompatActivity {
         createClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addClassSectionDialogFragment.show(getSupportFragmentManager(), AddClassSectionDialogFragment.TAG);
             }
         });
 
         addClassSectionDialogFragment.setAddClassSectionDialogListener(new AddClassSectionDialogFragment.AddClassSectionDialogListener() {
             @Override
             public void onCompleteBuildingSection(Section section) {
-                Toast.makeText(getApplicationContext(), section.getLabel(), Toast.LENGTH_LONG).show();
+                sectionsList.add(section);
+            }
+        });
+
+        addSectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addClassSectionDialogFragment.show(getSupportFragmentManager(), AddClassSectionDialogFragment.TAG);
+            }
+        });
+
+        viewSectionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewSectionsDialogFragment.setDialogSections(sectionsList);
+                viewSectionsDialogFragment.show(getSupportFragmentManager(), ViewSectionsDialogFragment.TAG);
             }
         });
     }
