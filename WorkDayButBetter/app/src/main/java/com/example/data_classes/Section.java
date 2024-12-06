@@ -141,20 +141,20 @@ public class Section {
         return SUCCESS;
     }
 
-    public Map<String, Object> getSectionDataAsMap(){
-        Map<String, Object> sectionData = new HashMap<>();
-
-        sectionData.put(FIELD_ID, this.getId_());
-        sectionData.put(FIELD_INSTITUTIONID, this.getInstitutionId());
-        sectionData.put(FIELD_MEMBERS, this.getMembers());
-        sectionData.put(FIELD_TIME, this.getTime());
-        sectionData.put(FIELD_LABEL, this.getLabel());
-        sectionData.put(FIELD_CLASSID, this.getClassId());
-
-        return sectionData;
-    }
+//    public Map<String, Object> getSectionDataAsMap(){
+//        Map<String, Object> sectionData = new HashMap<>();
+//
+//        sectionData.put(FIELD_ID, this.getId_());
+//        sectionData.put(FIELD_INSTITUTIONID, this.getInstitutionId());
+//        sectionData.put(FIELD_MEMBERS, this.getMembers());
+//        sectionData.put(FIELD_TIME, this.getTime());
+//        sectionData.put(FIELD_LABEL, this.getLabel());
+//        sectionData.put(FIELD_CLASSID, this.getClassId());
+//
+//        return sectionData;
+//    }
 
     public Task<Void> updateSectionDataInDatabase(FirebaseFirestore firebaseFirestore){
-        return firebaseFirestore.collection(COLLECTION_SECTION).document(String.valueOf(this.getId_())).update(this.getSectionDataAsMap());
+        return firebaseFirestore.collection(COLLECTION_SECTION).document(String.valueOf(this.getId_())).set(this);
     }
 }

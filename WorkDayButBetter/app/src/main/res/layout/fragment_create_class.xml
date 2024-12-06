@@ -149,14 +149,14 @@
                 android:textSize="8pt"
                 />
 
-            <Spinner
-                android:id="@+id/fragment_create_class_department_spinner"
+            <EditText
+                android:id="@+id/fragment_create_class_department_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-
+                android:hint="Department"
                 android:padding="10dp"
-                android:textColor="@color/white"
+                android:textColorHint="@color/white"
 
                 android:background="@drawable/fragment_create_class_edittext_background"
                 />

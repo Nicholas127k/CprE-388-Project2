@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -17,9 +18,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.application_data.UserInstitutionSingleton;
+import com.example.data_classes.Class;
 import com.example.data_classes.Section;
+import com.example.firebase_controllers.ClassFirebaseControllerSingleton;
+import com.example.id_generator.IdGenerator;
 import com.example.workdaybutbetter.views.AddClassSectionDialogFragment;
+import com.example.workdaybutbetter.views.LoadingDialogFragment;
 import com.example.workdaybutbetter.views.ViewSectionsDialogFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +39,7 @@ public class CreateClassActivity extends AppCompatActivity {
     private EditText classNameEditText;
     private EditText classNumberEditText;
     private EditText classDescriptionEditText;
+    private EditText classDepartmentEditText;
 
     private Button createClassButton;
     private AppCompatImageButton backButton;
@@ -44,6 +55,10 @@ public class CreateClassActivity extends AppCompatActivity {
 
     private List<Section> sectionsList;
 
+    private FirebaseFirestore firebaseFirestoreInstance;
+
+    private LoadingDialogFragment loadingDialogFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +70,16 @@ public class CreateClassActivity extends AppCompatActivity {
             return insets;
         });
 
+        firebaseFirestoreInstance = FirebaseFirestore.getInstance();
+
         sectionsList = new ArrayList<>();
 
         // Initialize the EditTexts and other views
         classNameEditText = findViewById(R.id.fragment_create_class_classname_edittext);
         classNumberEditText = findViewById(R.id.fragment_create_class_classnumber_edittext);
         classDescriptionEditText = findViewById(R.id.fragment_create_class_description_edittext);
+
+        loadingDialogFragment = new LoadingDialogFragment();
 
         viewSectionsButton = findViewById(R.id.fragment_create_class_view_sections_button);
         addSectionButton = findViewById(R.id.fragment_create_class_add_section_button);
@@ -73,39 +92,50 @@ public class CreateClassActivity extends AppCompatActivity {
             }
         });
 
-        departmentSpinner = findViewById(R.id.fragment_create_class_department_spinner);
+        classDepartmentEditText = findViewById(R.id.fragment_create_class_department_edittext);
 
         addClassSectionDialogFragment = new AddClassSectionDialogFragment();
         viewSectionsDialogFragment = new ViewSectionsDialogFragment();
 
-        // Set up the adapter for the department spinner
-        departmentSpinnerAdapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.departments,  // The array of department names defined in strings.xml
-                android.R.layout.simple_spinner_item // Layout for each item
-        );
-        departmentSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        departmentSpinner.setAdapter(departmentSpinnerAdapter);
-
-        // Set default selection (optional)
-        selectedDepartment = departmentSpinnerAdapter.getItem(0).toString();
-
-        // Handle item selection from the spinner
-        departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                selectedDepartment = departmentSpinnerAdapter.getItem(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Handle case where nothing is selected (optional)
-            }
-        });
-
         createClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+
+                int classId = IdGenerator.generateId();
+
+                Class newClass = new Class(
+                        classId,
+                        classDepartmentEditText.getText().toString(),
+                        Long.decode(classNumberEditText.getText().toString()),
+                        classNameEditText.getText().toString(),
+                        classDescriptionEditText.getText().toString(),
+                        new ArrayList<>(),
+                        UserInstitutionSingleton.getInstance().getId_()
+                );
+
+                for(int i = 0; i < sectionsList.size(); ++i){
+                    sectionsList.get(i).setClassId(classId);
+                    sectionsList.get(i).setInstitutionId(UserInstitutionSingleton.getInstance().getId_());
+                    newClass.addSection(sectionsList.get(i));
+                }
+
+                ClassFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).addClass(newClass)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        });
+
+                loadingDialogFragment.dismiss();
             }
         });
 

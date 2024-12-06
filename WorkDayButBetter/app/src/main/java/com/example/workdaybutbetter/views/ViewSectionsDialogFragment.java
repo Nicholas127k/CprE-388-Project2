@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.adapter.ViewSectionsDialogSectionsListAdapter;
@@ -36,6 +37,8 @@ public class ViewSectionsDialogFragment extends DialogFragment {
         this.viewSectionsDialogFragmentListener = viewSectionsDialogFragmentListener;
     }
 
+    private AppCompatButton exitButton;
+
     private ListView sectionsListView;
     private ViewSectionsDialogSectionsListAdapter viewSectionsDialogSectionsListAdapter;
 
@@ -46,6 +49,14 @@ public class ViewSectionsDialogFragment extends DialogFragment {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = requireActivity().getLayoutInflater();
         View viewSectionsDialogView = layoutInflater.inflate(R.layout.fragment_view_sections_dialog, null);
+
+        exitButton = viewSectionsDialogView.findViewById(R.id.fragment_view_sections_dialog_exit_button);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         sectionsListView = viewSectionsDialogView.findViewById(R.id.fragment_view_sections_dialog_sections_list);
         viewSectionsDialogSectionsListAdapter = new ViewSectionsDialogSectionsListAdapter(requireActivity(), R.layout.fragment_view_sections_dialog_list_item, dialogSections);
