@@ -20,6 +20,7 @@ public class AdvisorMainScreenActivity extends AppCompatActivity {
     private AppCompatImageButton profileButton;
     private LinearLayout createAClassButton;
     private LinearLayout removeAClassButton;
+    private LinearLayout searchAClassButton;
 
     private FirebaseAuth firebaseAuthenticationInstance;
     private FirebaseFirestore firebaseFirestoreInstance;
@@ -47,6 +48,7 @@ public class AdvisorMainScreenActivity extends AppCompatActivity {
             }
         });
 
+        searchAClassButton = findViewById(R.id.activity_advisor_main_screen_class_search_button_layout);
         createAClassButton = findViewById(R.id.activity_advisor_main_screen_add_class_button_layout);
         removeAClassButton = findViewById(R.id.activity_advisor_main_screen_remove_class_button_layout);
 
@@ -55,6 +57,14 @@ public class AdvisorMainScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent toCreateAClassIntent = new Intent(AdvisorMainScreenActivity.this, CreateClassActivity.class);
                 startActivity(toCreateAClassIntent);
+            }
+        });
+
+        searchAClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toSearchAClassIntent = new Intent(AdvisorMainScreenActivity.this, ClassSearchAcitvity.class);
+                startActivity(toSearchAClassIntent);
             }
         });
 

@@ -2,6 +2,7 @@ package com.example.workdaybutbetter.views;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,10 @@ public class LoadingDialogFragment extends DialogFragment {
         alertDialogBuilder.setView(loadingDialogView);
         alertDialogBuilder.setCancelable(false);
 
-        return alertDialogBuilder.create();
+        Dialog alertDialogView = alertDialogBuilder.create();
+        alertDialogView.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        return alertDialogView;
     }
 
 }

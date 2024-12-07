@@ -127,9 +127,21 @@ public class SignUpScreen extends AppCompatActivity {
                                     userType = UserType.STUDENT;
                                 } else if(userTypeSelected.equals("Counselor")) {
                                     userType = UserType.COUNSELOR;
+                                } else if(userTypeSelected.equals("Professor")){
+                                    userType = UserType.PROFESSOR;
                                 }
 
-                                User newUserData = new User(userData.getUid(), username, userData.getEmail(), "", "", new ArrayList<>(), userType, -1);
+                                User newUserData = new User(
+                                        userData.getUid(),
+                                        username,
+                                        userData.getEmail(),
+                                        "",
+                                        "",
+                                        new ArrayList<>(),
+                                        userType,
+                                        -1,
+                                        new ArrayList<>()
+                                );
                                 UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).addUser(newUserData)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override

@@ -29,6 +29,7 @@ import com.example.workdaybutbetter.views.ViewSectionsDialogFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Firebase;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -111,13 +112,20 @@ public class CreateClassActivity extends AppCompatActivity {
                         classNameEditText.getText().toString(),
                         classDescriptionEditText.getText().toString(),
                         new ArrayList<>(),
-                        UserInstitutionSingleton.getInstance().getId_()
+                        UserInstitutionSingleton.getInstance().getId_(),
+                        new ArrayList<>()
                 );
 
                 for(int i = 0; i < sectionsList.size(); ++i){
                     sectionsList.get(i).setClassId(classId);
                     sectionsList.get(i).setInstitutionId(UserInstitutionSingleton.getInstance().getId_());
-                    newClass.addSection(sectionsList.get(i));
+                    int status = newClass.addSection(sectionsList.get(i));
+
+                    if(status == Class.SECTION_ALREADY_IN_CLASS){
+                        loadingDialogFragment.dismiss();
+                        Toast.makeText(getApplicationContext(), "Section Already Exists in Class", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                 }
 
                 ClassFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).addClass(newClass)
@@ -142,6 +150,20 @@ public class CreateClassActivity extends AppCompatActivity {
         addClassSectionDialogFragment.setAddClassSectionDialogListener(new AddClassSectionDialogFragment.AddClassSectionDialogListener() {
             @Override
             public void onCompleteBuildingSection(Section section) {
+                int status = 0;
+
+                for(int i = 0; i < sectionsList.size(); ++i){
+                    if(section.getId_() == sectionsList.get(i).getId_() || section.getLabel().equals(sectionsList.get(i).getLabel())){
+                        status = Class.SECTION_ALREADY_IN_CLASS;
+                        break;
+                    }
+                }
+
+                if(status == Class.SECTION_ALREADY_IN_CLASS){
+                    Toast.makeText(getApplicationContext(), "Section Already Exists in Class", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 sectionsList.add(section);
             }
         });

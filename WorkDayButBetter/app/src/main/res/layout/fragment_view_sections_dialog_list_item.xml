@@ -34,7 +34,7 @@
         android:layout_marginHorizontal="4dp"
         android:layout_weight="7"
 
-        android:text="Section Label\nTime Start - Time End"
+        android:text="Section Label : Size\nTime Start - Time End"
         android:textColor="@color/white"
         android:textSize="10pt"
         android:gravity="center"

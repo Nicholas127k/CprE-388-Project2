@@ -1,10 +1,13 @@
 package com.example.data_classes;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     public static final String COLLECTION_USER = "users";
 
     public static final String FIELD_ID = "id_";
@@ -14,7 +17,8 @@ public class User {
     public static final String FIELD_LASTNAME = "lastname";
     public static final String FIELD_CLASSES = "classes";
     public static final String FIELD_USERTYPE = "userType";
-    private static final String FIELD_INSTITUTIONID = "institutionId";
+    public static final String FIELD_INSTITUTIONID = "institutionId";
+    public static final String FIELD_PENDINGCLASSES = "pendingClasses";
 
     String id_;
     private String username;
@@ -22,6 +26,7 @@ public class User {
     private String firstname;
     private String lastname;
     private List<Class> classes;
+    private List<Class> pendingClasses;
     private UserType userType;
     private int institutionId;
 
@@ -34,9 +39,10 @@ public class User {
         this.classes = null;
         this.userType = null;
         this.institutionId = -1;
+        this.pendingClasses = null;
     }
 
-    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses){
         this.id_ = _id;
         this.username = username;
         this.email = email;
@@ -45,6 +51,7 @@ public class User {
         this.classes = classes;
         this.userType = userType;
         this.institutionId = institutionId;
+        this.pendingClasses = classes;
     }
 
     /**
@@ -85,6 +92,10 @@ public class User {
         return this.institutionId;
     }
 
+    public List<Class> getPendingClasses() {
+        return this.pendingClasses;
+    }
+
     /**
      *
      * Setters
@@ -123,6 +134,10 @@ public class User {
         this.institutionId = institutionId;
     }
 
+    public void setPendingClasses(List<Class> pendingClasses){
+        this.pendingClasses = pendingClasses;
+    }
+
 
     public void copy(User user){
         this.id_ = user.getId_();
@@ -133,6 +148,7 @@ public class User {
         this.classes = user.getClasses();
         this.userType = user.getUserType();
         this.institutionId = user.getInstitutionId();
+        this.pendingClasses = user.getPendingClasses();
     }
 
     public void clear(){
@@ -144,9 +160,24 @@ public class User {
         this.classes = null;
         this.userType = null;
         this.institutionId = -1;
+        this.pendingClasses = null;
     }
 
     public User duplicate(){
-        return new User(this.id_, this.username, this.email, this.firstname, this.lastname, this.classes, this.userType, this.institutionId);
+        return new User(
+                this.id_,
+                this.username,
+                this.email,
+                this.firstname,
+                this.lastname,
+                this.classes,
+                this.userType,
+                this.institutionId,
+                this.pendingClasses
+        );
+    }
+
+    public Task<Void> updateUserInDatabase(FirebaseFirestore firebaseFirestore){
+        return firebaseFirestore.collection(COLLECTION_USER).document(this.id_).set(this);
     }
 }

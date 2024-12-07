@@ -1,6 +1,8 @@
 package com.example.data_classes;
 
-public class Institution {
+import java.io.Serializable;
+
+public class Institution implements Serializable {
 
     public static final String COLLECTIONS_INSTITUTION = "institutions";
 

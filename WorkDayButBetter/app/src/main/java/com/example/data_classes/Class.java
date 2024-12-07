@@ -10,13 +10,16 @@ import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Class {
+public class Class implements Serializable {
 
     public static final String COLLECTION_CLASS = "classes";
 
@@ -29,6 +32,7 @@ public class Class {
     public static final String FIELD_SECTIONBUCKETS = "sectionBuckets";
     public static final String FIELD_CLASSMEMBERS = "classMembers";
     public static final String FIELD_SIGNUPQUEUE = "signUpQueue";
+    public static final String FIELD_PROFESSORS = "professors";
 
     public static final int SUCCESS = 0;
 
@@ -111,6 +115,8 @@ public class Class {
      */
     private List<User> signUpQueue;
 
+    private List<User> professors;
+
     public Class() {
         this.id_ = -1;
         this.institutionId = -1;
@@ -121,9 +127,10 @@ public class Class {
         this.sectionBuckets = new HashMap<>();
         this.classMembers = new ArrayList<>();
         this.signUpQueue = new ArrayList<>();
+        this.professors = new ArrayList<>();
     }
 
-    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId) {
+    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId, List<User> professors) {
         this.id_ = _id;
         this.institutionId = institutionId;
         this.department = department;
@@ -133,6 +140,7 @@ public class Class {
         this.sectionBuckets = new HashMap<>();
         this.classMembers = new ArrayList<>();
         this.signUpQueue = signUpQueue;
+        this.professors = professors;
     }
 
     /**
@@ -178,6 +186,10 @@ public class Class {
         return this.sectionBuckets;
     }
 
+    public List<User> getProfessors(){
+        return this.professors;
+    }
+
     /**
      *
      *
@@ -211,6 +223,10 @@ public class Class {
 
     public void setSignUpQueue(List<User> queue){
         this.signUpQueue = queue;
+    }
+
+    public void setProfessors(List<User> professors){
+        this.professors = professors;
     }
 
 
@@ -314,7 +330,34 @@ public class Class {
 
     public static final int SECTION_ALREADY_IN_CLASS = 1;
     public int addSection(Section section){
+
+        Collection<Section> sectionCollection = this.sectionBuckets.values();
+        Iterator<Section> sectionCollectionIterator = sectionCollection.iterator();
+        while(sectionCollectionIterator.hasNext()){
+            Section currentSection = sectionCollectionIterator.next();
+            if(currentSection.getId_() == section.getId_() || currentSection.getLabel().equals(section.getLabel())){
+                return SECTION_ALREADY_IN_CLASS;
+            }
+        }
+
         this.sectionBuckets.put(String.valueOf(this.sectionBuckets.keySet().size()), section);
+        return SUCCESS;
+    }
+
+    public static final int USER_NOT_PROFESSOR = 1;
+    public static final int USER_ALREADY_EXISTS = 2;
+    public int addProfessor(User professor){
+        if(professor.getUserType() != UserType.PROFESSOR){
+            return USER_NOT_PROFESSOR;
+        }
+
+        for(int i = 0; i < this.professors.size(); ++i){
+            if(this.professors.get(i).getId_().equals(professor.getId_())){
+                return USER_ALREADY_EXISTS;
+            }
+        }
+
+        this.professors.add(professor);
         return SUCCESS;
     }
 }

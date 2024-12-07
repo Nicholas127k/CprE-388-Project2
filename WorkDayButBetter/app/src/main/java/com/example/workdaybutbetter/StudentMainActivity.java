@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +13,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.workdaybutbetter.views.LoadingDialogFragment;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class StudentMainActivity extends AppCompatActivity {
 
     private AppCompatImageButton profileButton;
-    private AppCompatImageButton addClassButton;
-    private AppCompatImageButton scheduleButton;
+    private LinearLayout addClassButton;
+
+    private LoadingDialogFragment loadingDialogFragment;
+
+    private FirebaseFirestore firebaseFirestoreInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +36,26 @@ public class StudentMainActivity extends AppCompatActivity {
             return insets;
         });
 
+        firebaseFirestoreInstance = FirebaseFirestore.getInstance();
+
+        loadingDialogFragment = new LoadingDialogFragment();
+
         profileButton = findViewById(R.id.activity_student_main_navigation_profile_button);
-        addClassButton = findViewById(R.id.activity_student_main_navigation_add_class_button);
-        scheduleButton = findViewById(R.id.activity_student_main_navigation_schedule_button);
+        addClassButton = findViewById(R.id.activity_student_main_add_class_button_layout);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent toUserProfileIntent = new Intent(StudentMainActivity.this, UserProfileActivity.class);
                 startActivity(toUserProfileIntent);
+            }
+        });
+
+        addClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toClassSignUpIntent = new Intent();
+                startActivity(toClassSignUpIntent);
             }
         });
     }

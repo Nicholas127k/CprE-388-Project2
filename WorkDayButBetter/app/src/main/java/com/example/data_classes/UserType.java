@@ -1,6 +1,8 @@
 package com.example.data_classes;
 
-public enum UserType {
+import java.io.Serializable;
+
+public enum UserType implements Serializable {
     NONE,
     STUDENT,
     PROFESSOR,

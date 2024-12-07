@@ -48,7 +48,7 @@ public class ViewSectionsDialogSectionsListAdapter extends ArrayAdapter<Section>
             AppCompatImageButton deleteSectionButton = resultView.findViewById(R.id.fragment_view_sections_dialog_delete_section_button);
 
             if(currentSectionInformationTextView != null){
-                currentSectionInformationTextView.setText(currentSection.getLabel() + "\n" + currentSection.getTime().getStartTime() + " - " + currentSection.getTime().getEndTime());
+                currentSectionInformationTextView.setText(currentSection.getLabel() + " : " + currentSection.getSectionSize() + "\n" + currentSection.getTime().getStartTime() + " - " + currentSection.getTime().getEndTime());
             }
 
             if(deleteSectionButton != null){

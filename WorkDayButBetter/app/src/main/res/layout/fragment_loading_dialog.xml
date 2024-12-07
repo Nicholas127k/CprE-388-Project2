@@ -2,6 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="400dp"
     android:layout_height="400dp"
+
+    android:minHeight="400dp"
+    android:minWidth="400dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_loading_dialog_layout"
 

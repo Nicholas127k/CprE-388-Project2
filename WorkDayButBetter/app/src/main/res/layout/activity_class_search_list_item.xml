@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:minHeight="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/activity_class_search_list_item_layout"
+    android:background="@drawable/activity_class_search_list_item_background"
+
+    android:layout_margin="14dp"
+    >
+
+    <TextView
+        android:id="@+id/activity_class_search_list_item_class_textview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:text="Unable to retrieve class data"
+        android:textColor="@color/black"
+        android:textSize="10pt"
+
+        android:padding="12dp"
+
+        android:gravity="center_vertical"
+        />
+
+</LinearLayout>
