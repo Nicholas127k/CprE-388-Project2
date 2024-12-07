@@ -13,13 +13,14 @@
         android:text="Classify"
         android:textColor="@color/white"
         android:textSize="20pt"
-
+        android:fontFamily="@font/crimson"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/activity_login_screen_textedit_button_layout"
 
         />
+
 
     <LinearLayout
         android:id="@+id/activity_login_screen_textedit_button_layout"
