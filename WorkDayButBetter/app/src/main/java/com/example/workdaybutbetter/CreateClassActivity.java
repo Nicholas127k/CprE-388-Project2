@@ -153,7 +153,7 @@ public class CreateClassActivity extends AppCompatActivity {
                 int status = 0;
 
                 for(int i = 0; i < sectionsList.size(); ++i){
-                    if(section.getId_() == sectionsList.get(i).getId_() || section.getLabel().equals(sectionsList.get(i).getLabel())){
+                    if(section.getLabel().equals(sectionsList.get(i).getLabel())){
                         status = Class.SECTION_ALREADY_IN_CLASS;
                         break;
                     }

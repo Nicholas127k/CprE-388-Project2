@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="Sign Up For A Class"
+                android:text="Sign Up"
                 android:textColor="@color/white"
 
                 android:gravity="center"
@@ -156,6 +156,42 @@
                 android:layout_height="wrap_content"
 
                 android:text="Remove A Class"
+                android:textColor="@color/white"
+
+                android:layout_marginVertical="6dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_student_main_view_schedule_button_layout"
+            android:orientation="vertical"
+
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:padding="20dp"
+            android:layout_margin="20dp"
+
+            android:layout_column="1"
+            android:gravity="center"
+
+            android:background="@drawable/activity_student_main_control_button_background"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_schedule_24"
+
+                android:layout_marginVertical="6dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="View Schedule"
                 android:textColor="@color/white"
 
                 android:layout_marginVertical="6dp"

@@ -335,7 +335,7 @@ public class Class implements Serializable {
         Iterator<Section> sectionCollectionIterator = sectionCollection.iterator();
         while(sectionCollectionIterator.hasNext()){
             Section currentSection = sectionCollectionIterator.next();
-            if(currentSection.getId_() == section.getId_() || currentSection.getLabel().equals(section.getLabel())){
+            if(currentSection.getLabel().equals(section.getLabel())){
                 return SECTION_ALREADY_IN_CLASS;
             }
         }

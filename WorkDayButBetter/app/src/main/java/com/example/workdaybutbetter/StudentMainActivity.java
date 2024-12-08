@@ -20,6 +20,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
     private AppCompatImageButton profileButton;
     private LinearLayout addClassButton;
+    private LinearLayout viewScheduleButton;
 
     private LoadingDialogFragment loadingDialogFragment;
 
@@ -42,6 +43,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
         profileButton = findViewById(R.id.activity_student_main_navigation_profile_button);
         addClassButton = findViewById(R.id.activity_student_main_add_class_button_layout);
+        viewScheduleButton = findViewById(R.id.activity_student_main_view_schedule_button_layout);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +56,8 @@ public class StudentMainActivity extends AppCompatActivity {
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toClassSignUpIntent = new Intent();
+                Intent toClassSignUpIntent = new Intent(StudentMainActivity.this, ClassSearchAcitvity.class);
+                toClassSignUpIntent.putExtra(ClassSearchAcitvity.EXTRA_SIGNUP, true);
                 startActivity(toClassSignUpIntent);
             }
         });

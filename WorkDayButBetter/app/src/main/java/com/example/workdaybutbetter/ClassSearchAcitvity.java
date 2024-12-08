@@ -1,5 +1,6 @@
 package com.example.workdaybutbetter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,8 +19,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -38,6 +44,8 @@ import java.util.List;
 
 public class ClassSearchAcitvity extends AppCompatActivity {
 
+    public static final String EXTRA_SIGNUP = "EXTRA_SIGNUP";
+
     private AppCompatImageButton backButton;
 
     private SearchView classSearchView;
@@ -51,6 +59,8 @@ public class ClassSearchAcitvity extends AppCompatActivity {
 
     private List<Class> classQueryResults;
 
+    private boolean signUpSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +71,8 @@ public class ClassSearchAcitvity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        signUpSearch = getIntent().getBooleanExtra(EXTRA_SIGNUP, false);
 
         firebaseFirestoreInstance = FirebaseFirestore.getInstance();
 
@@ -73,9 +85,15 @@ public class ClassSearchAcitvity extends AppCompatActivity {
         classSearchListAdapter.setClassSearchListAdapterListener(new ClassSearchListAdapter.ClassSearchListAdapterListener() {
             @Override
             public void onClassClickListener(int position, Class class_) {
-                Intent toClassViewIntent = new Intent(ClassSearchAcitvity.this, ClassViewActivity.class);
-                toClassViewIntent.putExtra(ClassViewActivity.EXTRA_CLASSDATA, class_);
-                startActivity(toClassViewIntent);
+                if(signUpSearch){
+                    Intent toClassSignUpIntent = new Intent(ClassSearchAcitvity.this, ClassSignUpActivity.class);
+                    toClassSignUpIntent.putExtra(ClassSignUpActivity.EXTRA_CLASSDATA, class_);
+                    startActivity(toClassSignUpIntent);
+                }else{
+                    Intent toClassViewIntent = new Intent(ClassSearchAcitvity.this, ClassViewActivity.class);
+                    toClassViewIntent.putExtra(ClassViewActivity.EXTRA_CLASSDATA, class_);
+                    startActivity(toClassViewIntent);
+                }
             }
         });
         classSearchListView.setAdapter(classSearchListAdapter);

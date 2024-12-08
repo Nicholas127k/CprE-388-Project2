@@ -40,9 +40,9 @@ public class ClassViewSectionListAdapter extends ArrayAdapter<Section> {
             resultView = layoutInflater.inflate(layoutId, null);
         }
 
-        if(currentSection == null){
+        if(currentSection != null){
             TextView sectionInformationTextView = resultView.findViewById(R.id.activity_class_view_section_list_item_section_information_textview);
-            sectionInformationTextView.setText(currentSection.getLabel() + " : " + currentSection.getTime().getStartTime() + " - " + currentSection.getTime().getEndTime());
+            sectionInformationTextView.setText(String.format("%s : %s - %s", currentSection.getLabel(), currentSection.getTime().getStartTime(), currentSection.getTime().getEndTime()));
 
             ConstraintLayout sectionListItemLayout = resultView.findViewById(R.id.activity_class_view_section_list_item_layout);
             sectionListItemLayout.setOnClickListener(new View.OnClickListener() {

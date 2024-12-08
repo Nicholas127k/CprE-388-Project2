@@ -30,6 +30,7 @@ public class ClassViewActivity extends AppCompatActivity {
 
     private AppCompatImageButton backButton;
     private AppCompatImageButton viewSignUpQueueButton;
+    private AppCompatImageButton administerCreditButton;
 
     private TextView classTitleTextView;
     private TextView classDescriptionTextView;
@@ -59,10 +60,9 @@ public class ClassViewActivity extends AppCompatActivity {
 
         firebaseFirestoreInstance = FirebaseFirestore.getInstance();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            classData = getIntent().getSerializableExtra(EXTRA_CLASSDATA, Class.class);
-        }
+        classData = getIntent().getSerializableExtra(EXTRA_CLASSDATA, Class.class);
 
+        administerCreditButton = findViewById(R.id.activity_class_view_navigation_bar_administer_credit_button);
         viewSignUpQueueButton = findViewById(R.id.activity_class_view_navigation_bar_view_signupqueue_button);
         backButton = findViewById(R.id.activity_class_view_navigation_bar_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +78,16 @@ public class ClassViewActivity extends AppCompatActivity {
         classTitleTextView.setText(classData.getDepartment() + " " + classData.getCode() + " : " + classData.getName());
         classDescriptionTextView.setText(classData.getDescription());
 
-        classMembersList = classData.getClassMembers();
+        classMembersList = new ArrayList<>();
+
+        classMembersList.addAll(classData.getClassMembers());
+
         membersListView = findViewById(R.id.activity_class_view_members_list_listview);
         classViewMembersListAdapter = new ClassViewMembersListAdapter(this, R.layout.activity_class_view_member_list_item, classMembersList);
         membersListView.setAdapter(classViewMembersListAdapter);
 
-        classSectionsList = new ArrayList<>();
+        classSectionsList = new ArrayList<>(classData.getSectionBuckets().values());
+
         sectionsListView = findViewById(R.id.activity_class_view_sections_list_listview);
         classViewSectionListAdapter = new ClassViewSectionListAdapter(this, R.layout.activity_class_view_section_list_item, classSectionsList);
         sectionsListView.setAdapter(classViewSectionListAdapter);

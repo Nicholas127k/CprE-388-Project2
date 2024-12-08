@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -19,6 +20,7 @@ public class User implements Serializable {
     public static final String FIELD_USERTYPE = "userType";
     public static final String FIELD_INSTITUTIONID = "institutionId";
     public static final String FIELD_PENDINGCLASSES = "pendingClasses";
+    public static final String FIELD_COMPLETEDCOURSES = "completedCourses";
 
     String id_;
     private String username;
@@ -29,6 +31,7 @@ public class User implements Serializable {
     private List<Class> pendingClasses;
     private UserType userType;
     private int institutionId;
+    private List<Class> completedCourses;
 
     public User(){
         this.id_ = null;
@@ -40,6 +43,7 @@ public class User implements Serializable {
         this.userType = null;
         this.institutionId = -1;
         this.pendingClasses = null;
+        this.completedCourses = null;
     }
 
     public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses){
@@ -52,6 +56,20 @@ public class User implements Serializable {
         this.userType = userType;
         this.institutionId = institutionId;
         this.pendingClasses = classes;
+        this.completedCourses = new ArrayList<>();
+    }
+
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses, List<Class> completedCourses){
+        this.id_ = _id;
+        this.username = username;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.classes = classes;
+        this.userType = userType;
+        this.institutionId = institutionId;
+        this.pendingClasses = classes;
+        this.completedCourses = completedCourses;
     }
 
     /**
@@ -96,6 +114,10 @@ public class User implements Serializable {
         return this.pendingClasses;
     }
 
+    public List<Class> getCompletedCourses(){
+        return this.completedCourses;
+    }
+
     /**
      *
      * Setters
@@ -138,6 +160,10 @@ public class User implements Serializable {
         this.pendingClasses = pendingClasses;
     }
 
+    public void setCompletedCourses(List<Class> completedCourses){
+        this.completedCourses = completedCourses;
+    }
+
 
     public void copy(User user){
         this.id_ = user.getId_();
@@ -149,6 +175,7 @@ public class User implements Serializable {
         this.userType = user.getUserType();
         this.institutionId = user.getInstitutionId();
         this.pendingClasses = user.getPendingClasses();
+        this.completedCourses = user.getCompletedCourses();
     }
 
     public void clear(){
@@ -161,6 +188,7 @@ public class User implements Serializable {
         this.userType = null;
         this.institutionId = -1;
         this.pendingClasses = null;
+        this.completedCourses = null;
     }
 
     public User duplicate(){
@@ -173,7 +201,8 @@ public class User implements Serializable {
                 this.classes,
                 this.userType,
                 this.institutionId,
-                this.pendingClasses
+                this.pendingClasses,
+                this.completedCourses
         );
     }
 

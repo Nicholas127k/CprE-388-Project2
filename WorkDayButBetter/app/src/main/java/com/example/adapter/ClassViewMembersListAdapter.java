@@ -40,7 +40,7 @@ public class ClassViewMembersListAdapter extends ArrayAdapter<User> {
             resultView = layoutInflater.inflate(layoutId, null);
         }
 
-        if(currentUser == null){
+        if(currentUser != null){
             TextView memberInformationTextView = resultView.findViewById(R.id.activity_class_view_member_list_item_member_information_textview);
             memberInformationTextView.setText(currentUser.getUsername());
 
