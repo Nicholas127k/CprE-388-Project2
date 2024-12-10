@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.UserData;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +33,19 @@ public class UserProfileActivity extends AppCompatActivity {
     private AppCompatButton logoutButton;
     private AppCompatButton joinInstitutionButton;
 
-    private TextView usernameText;
-    private TextView emailText;
-    private TextView firstnameText;
-    private TextView lastnameText;
-    private TextView userTypeText;
-    private TextView institutionText;
+    private EditText usernameText;
+    private EditText emailText;
+    private EditText firstnameText;
+    private EditText lastnameText;
+    private EditText userTypeText;
+    private EditText institutionText;
+
+    private AppCompatImageButton usernameButton;
+    private AppCompatImageButton emailButton;
+    private AppCompatImageButton firstnameButton;
+    private AppCompatImageButton lastnameButton;
+    private AppCompatImageButton userTypeButton;
+    private AppCompatImageButton institutionButton;
 
     private JoinInstitutionDialogFragment joinInstitutionDialogFragment;
 
@@ -123,6 +132,15 @@ public class UserProfileActivity extends AppCompatActivity {
         lastnameText = findViewById(R.id.activity_user_profile_lastname_text);
         userTypeText = findViewById(R.id.activity_user_profile_usertype_text);
         institutionText = findViewById(R.id.activity_user_profile_institution_text);
+
+        usernameButton = findViewById(R.id.activity_user_profile_username_bad_name_format_1);
+        emailButton = findViewById(R.id.activity_user_profile_email_bad_name_format_1);
+        firstnameButton = findViewById(R.id.activity_user_profile_FirstName_bad_name_format_1);
+        lastnameButton = findViewById(R.id.activity_user_profile_lastname_bad_name_format_1);
+        userTypeButton = findViewById(R.id.activity_user_profile_usertype_bad_name_format_1);
+        institutionText = findViewById(R.id.activity_user_profile_institution_bad_name_format_1);
+
+
 
         User userData = UserDataSingleton.getInstance();
         Institution institution = UserInstitutionSingleton.getInstance();
