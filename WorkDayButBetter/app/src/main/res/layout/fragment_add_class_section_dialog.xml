@@ -149,6 +149,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Size:"
+                android:textColor="@color/white"
+                android:textSize="10pt"
+                />
+
+            <EditText
+                android:id="@+id/fragment_add_class_section_dialog_section_size_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/white"
+                android:inputType="number"
+
+                android:layout_margin="20dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
             android:layout_gravity="center"
             android:gravity="center"
 

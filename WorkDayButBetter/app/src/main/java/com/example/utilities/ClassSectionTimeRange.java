@@ -1,9 +1,10 @@
 package com.example.utilities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassSectionTimeRange {
+public class ClassSectionTimeRange implements Serializable {
 
     private List<ClassSectionDayEnum> days;
     private String startTime;

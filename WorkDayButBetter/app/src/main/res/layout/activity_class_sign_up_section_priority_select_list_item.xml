@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="80dp"
+    android:minHeight="80dp"
+
+    android:layout_margin="14dp"
+
+    android:id="@+id/activity_class_sign_up_selection_priority_select_list_item_layout"
+
+    android:background="@drawable/activity_class_sign_up_selection_priority_select_list_item_background">
+
+    <Spinner
+        android:id="@+id/activity_class_sign_up_selection_priority_select_List_item_spinner"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:layout_margin="14dp"
+        android:gravity="center"
+
+        android:background="@drawable/activity_class_sign_up_selection_priority_select_list_item_spinner_background"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/activity_class_sign_up_selection_priority_select_list_item_section_information_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="14dp"
+
+        android:gravity="center"
+
+        android:text="Section Information"
+        android:textColor="@color/black"
+        android:textSize="12pt"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/activity_class_sign_up_selection_priority_select_List_item_spinner"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

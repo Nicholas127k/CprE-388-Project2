@@ -1,10 +1,14 @@
 package com.example.data_classes;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     public static final String COLLECTION_USER = "users";
 
     public static final String FIELD_ID = "id_";
@@ -14,6 +18,9 @@ public class User {
     public static final String FIELD_LASTNAME = "lastname";
     public static final String FIELD_CLASSES = "classes";
     public static final String FIELD_USERTYPE = "userType";
+    public static final String FIELD_INSTITUTIONID = "institutionId";
+    public static final String FIELD_PENDINGCLASSES = "pendingClasses";
+    public static final String FIELD_COMPLETEDCOURSES = "completedCourses";
 
     String id_;
     private String username;
@@ -21,7 +28,10 @@ public class User {
     private String firstname;
     private String lastname;
     private List<Class> classes;
+    private List<Class> pendingClasses;
     private UserType userType;
+    private int institutionId;
+    private List<Class> completedCourses;
 
     public User(){
         this.id_ = null;
@@ -31,9 +41,12 @@ public class User {
         this.lastname = null;
         this.classes = null;
         this.userType = null;
+        this.institutionId = -1;
+        this.pendingClasses = null;
+        this.completedCourses = null;
     }
 
-    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses){
         this.id_ = _id;
         this.username = username;
         this.email = email;
@@ -41,6 +54,22 @@ public class User {
         this.lastname = lastname;
         this.classes = classes;
         this.userType = userType;
+        this.institutionId = institutionId;
+        this.pendingClasses = classes;
+        this.completedCourses = new ArrayList<>();
+    }
+
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses, List<Class> completedCourses){
+        this.id_ = _id;
+        this.username = username;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.classes = classes;
+        this.userType = userType;
+        this.institutionId = institutionId;
+        this.pendingClasses = classes;
+        this.completedCourses = completedCourses;
     }
 
     /**
@@ -77,6 +106,18 @@ public class User {
         return this.userType;
     }
 
+    public int getInstitutionId(){
+        return this.institutionId;
+    }
+
+    public List<Class> getPendingClasses() {
+        return this.pendingClasses;
+    }
+
+    public List<Class> getCompletedCourses(){
+        return this.completedCourses;
+    }
+
     /**
      *
      * Setters
@@ -111,6 +152,18 @@ public class User {
         this.userType = userType;
     }
 
+    public void setInstitutionId(int institutionId){
+        this.institutionId = institutionId;
+    }
+
+    public void setPendingClasses(List<Class> pendingClasses){
+        this.pendingClasses = pendingClasses;
+    }
+
+    public void setCompletedCourses(List<Class> completedCourses){
+        this.completedCourses = completedCourses;
+    }
+
 
     public void copy(User user){
         this.id_ = user.getId_();
@@ -120,6 +173,9 @@ public class User {
         this.lastname = user.getLastname();
         this.classes = user.getClasses();
         this.userType = user.getUserType();
+        this.institutionId = user.getInstitutionId();
+        this.pendingClasses = user.getPendingClasses();
+        this.completedCourses = user.getCompletedCourses();
     }
 
     public void clear(){
@@ -130,5 +186,27 @@ public class User {
         this.lastname = null;
         this.classes = null;
         this.userType = null;
+        this.institutionId = -1;
+        this.pendingClasses = null;
+        this.completedCourses = null;
+    }
+
+    public User duplicate(){
+        return new User(
+                this.id_,
+                this.username,
+                this.email,
+                this.firstname,
+                this.lastname,
+                this.classes,
+                this.userType,
+                this.institutionId,
+                this.pendingClasses,
+                this.completedCourses
+        );
+    }
+
+    public Task<Void> updateUserInDatabase(FirebaseFirestore firebaseFirestore){
+        return firebaseFirestore.collection(COLLECTION_USER).document(this.id_).set(this);
     }
 }

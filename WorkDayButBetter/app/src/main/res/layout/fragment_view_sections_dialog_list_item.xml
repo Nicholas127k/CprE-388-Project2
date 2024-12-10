@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+
+    android:id="@+id/fragment_view_sections_dialog_list_item_layout"
+
+    android:background="@drawable/fragment_view_sections_dialog_list_item_background"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+
+    android:gravity="center"
+    android:weightSum="8"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fragment_view_sections_dialog_delete_section_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+
+        android:layout_weight="1"
+
+        android:background="@drawable/fragment_view_sections_dialog_list_item_delete_button_background"
+
+        android:src="@drawable/baseline_close_24"
+        />
+
+    <TextView
+        android:id="@+id/fragment_view_sections_dialog_section_information_textview"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="4dp"
+        android:layout_weight="7"
+
+        android:text="Section Label : Size\nTime Start - Time End"
+        android:textColor="@color/white"
+        android:textSize="10pt"
+        android:gravity="center"
+
+        android:background="@drawable/fragment_view_sections_dialog_list_item_section_information_background"
+        />
+
+</LinearLayout>

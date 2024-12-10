@@ -1,6 +1,8 @@
 package com.example.utilities;
 
-public enum ClassSectionDayEnum {
+import java.io.Serializable;
+
+public enum ClassSectionDayEnum implements Serializable {
     SUNDAY,
     MONDAY,
     TUESDAY,

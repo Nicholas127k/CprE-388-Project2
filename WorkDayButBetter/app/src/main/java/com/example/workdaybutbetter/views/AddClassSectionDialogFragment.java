@@ -36,6 +36,7 @@ public class AddClassSectionDialogFragment extends DialogFragment {
     private EditText sectionLabelEditText;
     private EditText toTimeEditText;
     private EditText fromTimeEditText;
+    private EditText sectionSizeEditText;
 
     private CheckBox mondayCheckbox;
     private CheckBox tuesdayCheckbox;
@@ -58,6 +59,7 @@ public class AddClassSectionDialogFragment extends DialogFragment {
         sectionLabelEditText = dialogView.findViewById(R.id.fragment_add_class_section_dialog_section_label_edittext);
         toTimeEditText = dialogView.findViewById(R.id.fragment_add_class_section_dialog_to_time_edittext);
         fromTimeEditText = dialogView.findViewById(R.id.fragment_add_class_section_dialog_from_time_edittext);
+        sectionSizeEditText = dialogView.findViewById(R.id.fragment_add_class_section_dialog_section_size_edittext);
 
         mondayCheckbox = dialogView.findViewById(R.id.fragment_add_class_section_dialog_monday_checkbox);
         tuesdayCheckbox = dialogView.findViewById(R.id.fragment_add_class_section_dialog_tuesday_checkbox);
@@ -85,6 +87,7 @@ public class AddClassSectionDialogFragment extends DialogFragment {
                 addedSection.setId_(1000);
 
                 addedSection.setLabel(sectionLabelEditText.getText().toString());
+                addedSection.setSectionSize(Integer.parseInt(sectionSizeEditText.getText().toString()));
 
                 if(mondayCheckbox.isChecked()){
                     sectionDays.add(ClassSectionDayEnum.MONDAY);

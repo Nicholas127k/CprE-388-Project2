@@ -50,8 +50,8 @@ public class ClassScheduleScreen extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ClassScheduleScreen.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ClassScheduleScreen.this, MainActivity.class);
+//                startActivity(intent);
             }
         });
 

@@ -10,4 +10,6 @@
     <color name="platinum">#FFE0E0E2</color>
 
     <color name="edittext_background_color">#30ffffff</color>
+
+    <color name="red">#FFb30000</color>
 </resources>

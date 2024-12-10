@@ -6,15 +6,20 @@ import com.example.utilities.ClassSectionTimeRange;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-public class Class {
+public class Class implements Serializable {
 
     public static final String COLLECTION_CLASS = "classes";
 
@@ -27,6 +32,7 @@ public class Class {
     public static final String FIELD_SECTIONBUCKETS = "sectionBuckets";
     public static final String FIELD_CLASSMEMBERS = "classMembers";
     public static final String FIELD_SIGNUPQUEUE = "signUpQueue";
+    public static final String FIELD_PROFESSORS = "professors";
 
     public static final int SUCCESS = 0;
 
@@ -85,7 +91,7 @@ public class Class {
      * it can only be modified from the backend function
      *
      */
-    private HashMap<Integer, Section> sectionBuckets;
+    private HashMap<String, Section> sectionBuckets;
 
     /**
      *
@@ -109,6 +115,8 @@ public class Class {
      */
     private List<User> signUpQueue;
 
+    private List<User> professors;
+
     public Class() {
         this.id_ = -1;
         this.institutionId = -1;
@@ -119,9 +127,10 @@ public class Class {
         this.sectionBuckets = new HashMap<>();
         this.classMembers = new ArrayList<>();
         this.signUpQueue = new ArrayList<>();
+        this.professors = new ArrayList<>();
     }
 
-    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId) {
+    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId, List<User> professors) {
         this.id_ = _id;
         this.institutionId = institutionId;
         this.department = department;
@@ -131,6 +140,7 @@ public class Class {
         this.sectionBuckets = new HashMap<>();
         this.classMembers = new ArrayList<>();
         this.signUpQueue = signUpQueue;
+        this.professors = professors;
     }
 
     /**
@@ -172,8 +182,12 @@ public class Class {
         return this.signUpQueue;
     }
 
-    public HashMap<Integer, Section> getSectionBuckets(){
+    public HashMap<String, Section> getSectionBuckets(){
         return this.sectionBuckets;
+    }
+
+    public List<User> getProfessors(){
+        return this.professors;
     }
 
     /**
@@ -211,6 +225,10 @@ public class Class {
         this.signUpQueue = queue;
     }
 
+    public void setProfessors(List<User> professors){
+        this.professors = professors;
+    }
+
 
     public static final int ERROR_MEMBER_ALREADY_EXISTS_IN_SIGN_UP_QUEUE = 1;
     /**
@@ -228,7 +246,7 @@ public class Class {
         boolean memberExists = false;
         for(int i = 0; i < this.signUpQueue.size(); ++i){
             User member = this.signUpQueue.get(i);
-            if(member.getId_() == user.getId_()){
+            if(Objects.equals(member.getId_(), user.getId_())){
                 memberExists = true;
             }
         }
@@ -259,7 +277,7 @@ public class Class {
         int memberIndex = 0;
         for(int i = 0; i < this.signUpQueue.size(); ++i){
             User member = this.signUpQueue.get(i);
-            if(member.getId_() == user.getId_()){
+            if(Objects.equals(member.getId_(), user.getId_())){
                 memberExists = true;
                 memberIndex = i;
             }
@@ -281,6 +299,7 @@ public class Class {
      *
      * @return The data of the class represented as a map
      */
+    @Exclude
     public Map<String, Object> getClassDataAsMap(){
         Map<String, Object> classData = new HashMap<>();
 
@@ -305,6 +324,40 @@ public class Class {
      * @return The task of the database transaction
      */
     public Task<Void> updateClassInDatabase(FirebaseFirestore firebaseFirestore){
-        return firebaseFirestore.collection(COLLECTION_CLASS).document(String.valueOf(this.getId_())).update(this.getClassDataAsMap());
+        return firebaseFirestore.collection(COLLECTION_CLASS).document(String.valueOf(this.getId_())).set(this);
+    }
+
+
+    public static final int SECTION_ALREADY_IN_CLASS = 1;
+    public int addSection(Section section){
+
+        Collection<Section> sectionCollection = this.sectionBuckets.values();
+        Iterator<Section> sectionCollectionIterator = sectionCollection.iterator();
+        while(sectionCollectionIterator.hasNext()){
+            Section currentSection = sectionCollectionIterator.next();
+            if(currentSection.getLabel().equals(section.getLabel())){
+                return SECTION_ALREADY_IN_CLASS;
+            }
+        }
+
+        this.sectionBuckets.put(String.valueOf(this.sectionBuckets.keySet().size()), section);
+        return SUCCESS;
+    }
+
+    public static final int USER_NOT_PROFESSOR = 1;
+    public static final int USER_ALREADY_EXISTS = 2;
+    public int addProfessor(User professor){
+        if(professor.getUserType() != UserType.PROFESSOR){
+            return USER_NOT_PROFESSOR;
+        }
+
+        for(int i = 0; i < this.professors.size(); ++i){
+            if(this.professors.get(i).getId_().equals(professor.getId_())){
+                return USER_ALREADY_EXISTS;
+            }
+        }
+
+        this.professors.add(professor);
+        return SUCCESS;
     }
 }

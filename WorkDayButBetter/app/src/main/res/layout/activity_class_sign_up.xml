@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_class_sign_up_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lapis_lazuli"
+
+    tools:context=".ClassSignUpActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_class_sign_up_navigation_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_margin="14dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/activity_class_sign_up_navigation_bar_back_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/activity_class_sign_up_back_button_background"
+
+            android:src="@drawable/baseline_arrow_back_24"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_class_sign_up_class_information_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginVertical="30dp"
+        android:gravity="center"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/activity_class_sign_up_section_selection_listview"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_class_sign_up_navigation_bar_layout"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed">
+
+
+        <TextView
+            android:id="@+id/activity_class_sign_up_class_information_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginVertical="5dp"
+
+            android:text="Dept Number : Class Name"
+            android:textColor="@color/white"
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/activity_class_sign_up_class_description_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginVertical="5dp"
+
+            android:text="Class Description"
+            android:textColor="@color/white"
+            android:textSize="8pt" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/activity_class_sign_up_section_selection_listview"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginVertical="20dp"
+
+        android:layout_marginHorizontal="14dp"
+
+        android:dividerHeight="10dp"
+        android:divider="#00000000"
+
+        android:minHeight="550dp"
+        android:maxHeight="550dp"
+
+        app:layout_constraintBottom_toTopOf="@id/activity_class_sign_up_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_class_sign_up_class_information_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/activity_class_sign_up_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/activity_class_sign_up_signup_button_background"
+
+        android:padding="12dp"
+
+        android:text="Sign Up For Class"
+        android:textColor="@color/black"
+        android:textSize="7pt"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_class_sign_up_section_selection_listview" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,43 +16,55 @@
         android:theme="@style/Theme.WorkDayButBetter"
         tools:targetApi="31">
         <activity
-            android:name=".CreateClassActivity"
+            android:name=".ClassSignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".ClassViewActivity"
             android:exported="false" />
         <activity
-            android:name=".AdvisorMainScreen"
-            android:exported="false" /> <!-- Set LogInScreen as the first screen (launcher activity) -->
-        <activity
-            android:name=".AdvisorMainScreen"
-            android:exported="false" />
-        <activity
-            android:name=".DeleteClassScreen"
-            android:exported="false" />
-        <activity
-            android:name=".DeleteClassScreen"
-            android:exported="false" />
-        <activity
-            android:name=".StudentMainActivity"
+            android:name=".ClassSearchAcitvity"
             android:exported="false"
-            android:label="@string/title_activity_student_main"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.WorkDayButBetter" />
         <activity
+            android:name=".CreateInstitutionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateClassActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdvisorMainScreenActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeleteClassScreen"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".StudentMainActivity"
             android:exported="false"
             android:label="@string/title_activity_student_main"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.WorkDayButBetter" />
         <activity
             android:name=".ClassScheduleScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AvailableClassesScreen"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.WorkDayButBetter" /> <!-- Set LogInScreen as the first screen (launcher activity) -->
         <activity
             android:name=".LogInScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -61,10 +73,8 @@
         </activity> <!-- Other activities -->
         <activity
             android:name=".SignUpScreen"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
