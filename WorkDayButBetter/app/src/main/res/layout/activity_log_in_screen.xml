@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lapis_lazuli"
@@ -9,20 +10,22 @@
     android:id="@+id/activity_login_screen_layout"
     >
 
-    <TextView
+    <ImageView
         android:id="@+id/activity_login_screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Classify"
+        app:srcCompat="@drawable/classify_removebg_preview"
         android:textColor="@color/white"
         android:textSize="20pt"
-
+        android:fontFamily="@font/crimson"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/activity_login_screen_textedit_button_layout"
 
         />
+
+
 
     <LinearLayout
         android:id="@+id/activity_login_screen_textedit_button_layout"
@@ -105,6 +108,8 @@
             />
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

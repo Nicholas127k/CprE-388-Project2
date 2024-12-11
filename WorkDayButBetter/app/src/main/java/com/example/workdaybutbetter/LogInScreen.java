@@ -119,7 +119,6 @@ public class LogInScreen extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "User information is null", Toast.LENGTH_LONG).show();
                                     return;
                                 }
-
                                 UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).getUserFromId(firebaseUser.getUid())
                                         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                             @Override
@@ -130,7 +129,6 @@ public class LogInScreen extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "Unable to find user information", Toast.LENGTH_LONG).show();
                                                     return;
                                                 }
-
                                                 DocumentSnapshot userDataDocument = userDataDocuments.get(0);
                                                 User userData = userDataDocument.toObject(User.class);
 
@@ -139,7 +137,6 @@ public class LogInScreen extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "Error while converting user data", Toast.LENGTH_LONG).show();
                                                     return;
                                                 }
-
                                                 UserDataSingleton.setInstance(userData);
 
                                                 if(userData.getUserType() == UserType.NONE){
