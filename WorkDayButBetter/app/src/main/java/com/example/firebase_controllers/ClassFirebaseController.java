@@ -1,6 +1,7 @@
 package com.example.firebase_controllers;
 
 import com.example.data_classes.Class;
+import com.example.data_classes.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.data_classes.Class;
 import com.example.data_classes.Section;
 import com.example.workdaybutbetter.R;
 
@@ -20,6 +21,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
 
@@ -45,10 +47,11 @@ public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
 
         this.sectionsPriorityList = new ArrayList<>();
         for(int i = 0; i < this.sectionsList.size(); ++i){
-            this.sectionsPriorityList.add(i + 1);
+            this.sectionsPriorityList.add(1);
         }
 
-        sectionsListItemSpinnerAdapter = new ArrayAdapter<>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item, this.spinnerData);
+        sectionsListItemSpinnerAdapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item, this.spinnerData);
+
     }
 
     @NonNull
@@ -67,40 +70,27 @@ public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
             Spinner sectionPrioritySpinner = resultView.findViewById(R.id.activity_class_sign_up_selection_priority_select_List_item_spinner);
             TextView sectionInformationTextView = resultView.findViewById(R.id.activity_class_sign_up_selection_priority_select_list_item_section_information_textview);
             sectionInformationTextView.setText(currentSection.getLabel() + " : " + currentSection.getTime().getStartTime() + " - " + currentSection.getTime().getEndTime());
+            sectionPrioritySpinner.setAdapter(sectionsListItemSpinnerAdapter);
 
             sectionPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    Log.d("ADAPTER", sectionsPriorityList.toString());
-                    Log.d("ADAPTER", sectionPrioritySpinner.getSelectedItem().toString() + " " + position + " " + sectionsPriorityList.get(position));
-                    if(!Integer.valueOf(sectionPrioritySpinner.getSelectedItem().toString()).equals(sectionsPriorityList.get(position))){
-                        sectionsPriorityList.set(position, i + 1);
-                        sectionPrioritySpinner.setSelection(sectionsPriorityList.get(position) - 1);
-                        Log.d("ADAPTER", sectionsPriorityList.get(position).toString());
-                        Log.d("ADAPTER", "\n\n");
-                    }else{
-                        sectionPrioritySpinner.setSelection(sectionsPriorityList.get(position) - 1);
-                    }
-                    Log.d("ADAPTER", String.valueOf(i) + String.valueOf(l));
-//                    swapSections(position, i);notifyDataSetChanged();
+
+                    sectionsPriorityList.set(position, Integer.valueOf(spinnerData.get((int)l)));
+
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {}
             });
 
-            sectionPrioritySpinner.setAdapter(sectionsListItemSpinnerAdapter);
 
         }
 
         return resultView;
     }
 
-    public void swapSections(int index1, int index2){
-        Section sectionData1 = this.sectionsList.get(index1);
-        Section sectionData2 = this.sectionsList.get(index2);
-
-        this.sectionsList.set(index1, sectionData2);
-        this.sectionsList.set(index2, sectionData1);
+    public List<Integer> getSectionPriorities(){
+        return this.sectionsPriorityList;
     }
 }

@@ -33,6 +33,7 @@ public class Class implements Serializable {
     public static final String FIELD_CLASSMEMBERS = "classMembers";
     public static final String FIELD_SIGNUPQUEUE = "signUpQueue";
     public static final String FIELD_PROFESSORS = "professors";
+    public static final String FIELD_PREREQUISITES = "prerequisites";
 
     public static final int SUCCESS = 0;
 
@@ -113,9 +114,11 @@ public class Class implements Serializable {
      * clicks the button to assign students to classes, it will take students from the sign-up queue and put them in their respective class sections
      *
      */
-    private List<User> signUpQueue;
+    private List<ClassSignUpQueueEntry> signUpQueue;
 
     private List<User> professors;
+
+    private List<Class> prerequisites;
 
     public Class() {
         this.id_ = -1;
@@ -128,9 +131,10 @@ public class Class implements Serializable {
         this.classMembers = new ArrayList<>();
         this.signUpQueue = new ArrayList<>();
         this.professors = new ArrayList<>();
+        this.prerequisites = new ArrayList<>();
     }
 
-    public Class(int _id, String department, long code, String name, String description, List<User> signUpQueue, int institutionId, List<User> professors) {
+    public Class(int _id, String department, long code, String name, String description, List<ClassSignUpQueueEntry> signUpQueue, int institutionId, List<User> professors, List<Class> prerequisites) {
         this.id_ = _id;
         this.institutionId = institutionId;
         this.department = department;
@@ -141,6 +145,7 @@ public class Class implements Serializable {
         this.classMembers = new ArrayList<>();
         this.signUpQueue = signUpQueue;
         this.professors = professors;
+        this.prerequisites = prerequisites;
     }
 
     /**
@@ -178,7 +183,7 @@ public class Class implements Serializable {
         return this.classMembers;
     }
 
-    public List<User> getSignUpQueue() {
+    public List<ClassSignUpQueueEntry> getSignUpQueue() {
         return this.signUpQueue;
     }
 
@@ -188,6 +193,10 @@ public class Class implements Serializable {
 
     public List<User> getProfessors(){
         return this.professors;
+    }
+
+    public List<Class> getPrerequisites(){
+        return this.prerequisites;
     }
 
     /**
@@ -221,12 +230,16 @@ public class Class implements Serializable {
         this.description = description;
     }
 
-    public void setSignUpQueue(List<User> queue){
+    public void setSignUpQueue(List<ClassSignUpQueueEntry> queue){
         this.signUpQueue = queue;
     }
 
     public void setProfessors(List<User> professors){
         this.professors = professors;
+    }
+
+    public void setPrerequisites(List<Class> prerequisites){
+        this.prerequisites = prerequisites;
     }
 
 
@@ -242,11 +255,11 @@ public class Class implements Serializable {
      * @returnValues 2. ERROR_MEMBER_ALREADY_EXISTS_IN_SIGN_UP_QUEUE
      *
      */
-    public int addMemberToSignUpQueue(User user){
+    public int addMemberToSignUpQueue(ClassSignUpQueueEntry user){
         boolean memberExists = false;
         for(int i = 0; i < this.signUpQueue.size(); ++i){
-            User member = this.signUpQueue.get(i);
-            if(Objects.equals(member.getId_(), user.getId_())){
+            User member = this.signUpQueue.get(i).getStudent();
+            if(Objects.equals(member.getId_(), user.getStudent().getId_())){
                 memberExists = true;
             }
         }
@@ -276,7 +289,7 @@ public class Class implements Serializable {
         boolean memberExists = false;
         int memberIndex = 0;
         for(int i = 0; i < this.signUpQueue.size(); ++i){
-            User member = this.signUpQueue.get(i);
+            User member = this.signUpQueue.get(i).getStudent();
             if(Objects.equals(member.getId_(), user.getId_())){
                 memberExists = true;
                 memberIndex = i;
@@ -312,6 +325,8 @@ public class Class implements Serializable {
         classData.put(FIELD_SECTIONBUCKETS, this.getSectionBuckets());
         classData.put(FIELD_CLASSMEMBERS, this.getClassMembers());
         classData.put(FIELD_SIGNUPQUEUE, this.getSignUpQueue());
+        classData.put(FIELD_PROFESSORS, this.getProfessors());
+        classData.put(FIELD_PREREQUISITES, this.getPrerequisites());
 
         return classData;
     }

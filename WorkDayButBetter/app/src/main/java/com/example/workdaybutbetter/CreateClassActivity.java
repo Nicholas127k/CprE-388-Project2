@@ -113,6 +113,7 @@ public class CreateClassActivity extends AppCompatActivity {
                         classDescriptionEditText.getText().toString(),
                         new ArrayList<>(),
                         UserInstitutionSingleton.getInstance().getId_(),
+                        new ArrayList<>(),
                         new ArrayList<>()
                 );
 

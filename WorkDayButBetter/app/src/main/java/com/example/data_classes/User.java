@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
     private List<Class> classes;
-    private List<Class> pendingClasses;
+    private List<Integer> pendingClasses;
     private UserType userType;
     private int institutionId;
     private List<Class> completedCourses;
@@ -46,7 +46,7 @@ public class User implements Serializable {
         this.completedCourses = null;
     }
 
-    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Integer> pendingClasses){
         this.id_ = _id;
         this.username = username;
         this.email = email;
@@ -55,11 +55,11 @@ public class User implements Serializable {
         this.classes = classes;
         this.userType = userType;
         this.institutionId = institutionId;
-        this.pendingClasses = classes;
+        this.pendingClasses = pendingClasses;
         this.completedCourses = new ArrayList<>();
     }
 
-    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Class> pendingClasses, List<Class> completedCourses){
+    public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Integer> pendingClasses, List<Class> completedCourses){
         this.id_ = _id;
         this.username = username;
         this.email = email;
@@ -68,7 +68,7 @@ public class User implements Serializable {
         this.classes = classes;
         this.userType = userType;
         this.institutionId = institutionId;
-        this.pendingClasses = classes;
+        this.pendingClasses = pendingClasses;
         this.completedCourses = completedCourses;
     }
 
@@ -110,7 +110,7 @@ public class User implements Serializable {
         return this.institutionId;
     }
 
-    public List<Class> getPendingClasses() {
+    public List<Integer> getPendingClasses() {
         return this.pendingClasses;
     }
 
@@ -156,8 +156,21 @@ public class User implements Serializable {
         this.institutionId = institutionId;
     }
 
-    public void setPendingClasses(List<Class> pendingClasses){
+    public void setPendingClasses(List<Integer> pendingClasses){
         this.pendingClasses = pendingClasses;
+    }
+
+    public void addPendingClass(Class pendingClass){
+        this.pendingClasses.add(pendingClass.getId_());
+    }
+
+    public void removePendingClass(Class removeClass){
+        for(int i = 0; i < this.pendingClasses.size(); ++i){
+            if(removeClass.getId_() == this.pendingClasses.get(i)){
+                this.pendingClasses.remove(i);
+                return;
+            }
+        }
     }
 
     public void setCompletedCourses(List<Class> completedCourses){

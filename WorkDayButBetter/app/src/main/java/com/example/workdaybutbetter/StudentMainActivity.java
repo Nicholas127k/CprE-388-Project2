@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.application_data.UserDataSingleton;
+import com.example.data_classes.UserType;
 import com.example.workdaybutbetter.views.LoadingDialogFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -21,6 +23,7 @@ public class StudentMainActivity extends AppCompatActivity {
     private AppCompatImageButton profileButton;
     private LinearLayout addClassButton;
     private LinearLayout viewScheduleButton;
+    private LinearLayout removeFromSignUpQueueButton;
 
     private LoadingDialogFragment loadingDialogFragment;
 
@@ -44,6 +47,15 @@ public class StudentMainActivity extends AppCompatActivity {
         profileButton = findViewById(R.id.activity_student_main_navigation_profile_button);
         addClassButton = findViewById(R.id.activity_student_main_add_class_button_layout);
         viewScheduleButton = findViewById(R.id.activity_student_main_view_schedule_button_layout);
+        removeFromSignUpQueueButton = findViewById(R.id.activity_student_main_remove_class_button_layout);
+
+        removeFromSignUpQueueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toRemoveFromSignUpQueueIntent = new Intent(StudentMainActivity.this, RemoveFromSignUpQueueActivity.class);
+                startActivity(toRemoveFromSignUpQueueIntent);
+            }
+        });
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override

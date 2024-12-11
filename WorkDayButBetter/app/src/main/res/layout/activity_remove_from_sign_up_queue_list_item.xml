@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/activity_remove_from_sign_up_queue_list_item_layout"
+    android:layout_width="match_parent"
+
+    android:layout_height="80dp"
+    android:minHeight="80dp"
+    android:maxHeight="80dp"
+
+    android:background="@drawable/activity_remove_from_sign_up_queue_list_item_background"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/activity_remove_from_sign_up_queue_remove_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+
+        android:layout_margin="14dp"
+
+        android:background="@drawable/activity_remove_from_sign_up_queue_list_item_remove_item_background"
+        android:src="@drawable/baseline_close_24"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/activity_remove_from_sign_up_queue_class_data"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+
+        android:gravity="center"
+        android:layout_margin="20dp"
+
+        android:text="Class Data"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/activity_remove_from_sign_up_queue_remove_button"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
