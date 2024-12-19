@@ -1,6 +1,7 @@
 package com.example.adapter;
 
 import android.content.Context;
+import android.icu.number.NumberFormatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,17 @@ import com.example.workdaybutbetter.R;
 
 import org.w3c.dom.Text;
 
+import java.nio.file.Files;
 import java.util.List;
-
+/**
+ * An adapter for displaying a list of sections in a dialog.
+ *
+ * This adapter extends the array adapter class and is responsible for
+ * creating and managing the views that display section information in a list
+ * within a dialog. It allows for displaying section details and provides a
+ * button for deleting sections.
+ *
+ */
 public class ViewSectionsDialogSectionsListAdapter extends ArrayAdapter<Section> {
 
     private int listLayout;
@@ -30,7 +40,17 @@ public class ViewSectionsDialogSectionsListAdapter extends ArrayAdapter<Section>
         this.listLayout = resource;
         this.sectionsData = objects;
     }
-
+    /**
+     * Gets the view for a specific position System.in the list.
+     *
+     * This method inflates the layout for the list item, sets up the views
+     *NumberFormatter.with the section information, and handles theFiles.delete buttonandroidx.test.espresso.action.ViewActions.click.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view for the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent){

@@ -17,7 +17,13 @@ import com.example.application_data.UserDataSingleton;
 import com.example.data_classes.UserType;
 import com.example.workdaybutbetter.views.LoadingDialogFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+/**
+ * Main activity for student users.
+ *
+ * This activity serves as the central hub for student users, providing access
+ * to various functionalities such as adding classes, viewing schedules,
+ * managing sign-up queues, and accessing their profile.
+ */
 public class StudentMainActivity extends AppCompatActivity {
 
     private AppCompatImageButton profileButton;
@@ -28,7 +34,10 @@ public class StudentMainActivity extends AppCompatActivity {
     private LoadingDialogFragment loadingDialogFragment;
 
     private FirebaseFirestore firebaseFirestoreInstance;
-
+    /**
+     * for the student main screen. It handles navigation to other activities
+     * based on user interactions with buttons and layouts.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

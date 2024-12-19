@@ -7,7 +7,13 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Represents a user in the application.
+ * This class encapsulates the data and functionality associated with a user,
+ * including their personal information, classes, user type, and institution
+ * affiliation. It provides methods for creating, updating, and managing user
+ * data.
+ */
 public class User implements Serializable {
     public static final String COLLECTION_USER = "users";
 
@@ -21,7 +27,9 @@ public class User implements Serializable {
     public static final String FIELD_INSTITUTIONID = "institutionId";
     public static final String FIELD_PENDINGCLASSES = "pendingClasses";
     public static final String FIELD_COMPLETEDCOURSES = "completedCourses";
-
+    /**
+     * These Strings and lists are what information gets stored about the user
+     */
     String id_;
     private String username;
     private String email;
@@ -32,7 +40,9 @@ public class User implements Serializable {
     private UserType userType;
     private int institutionId;
     private List<Class> completedCourses;
-
+    /**
+     * Creates a new, empty user object.
+     */
     public User(){
         this.id_ = null;
         this.username = null;
@@ -45,7 +55,10 @@ public class User implements Serializable {
         this.pendingClasses = null;
         this.completedCourses = null;
     }
-
+    /**
+     *
+     *creates user with id, username, email, firstname, lastname, class list, usertype(student, profs, counselor), school id, classes student is queued to
+     */
     public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Integer> pendingClasses){
         this.id_ = _id;
         this.username = username;
@@ -58,7 +71,20 @@ public class User implements Serializable {
         this.pendingClasses = pendingClasses;
         this.completedCourses = new ArrayList<>();
     }
-
+    /**
+     * Creates a new user object with the specified details.
+     *
+     * @param _id             The user's ID.
+     * @param username        The user's username.
+     * @param email           The user's email.
+     * @param firstname       The user's first name.
+     * @param lastname        The user's last name.
+     * @param classes         The list of classes the user is enrolled in.
+     * @param userType        The user's type (e.g., student, professor, counselor).
+     * @param institutionId   The ID of the user's institution.
+     * @param pendingClasses  The list of classes the user is pending enrollment in.
+     *
+     */
     public User(String _id, String username, String email, String firstname, String lastname, List<Class> classes, UserType userType, int institutionId, List<Integer> pendingClasses, List<Class> completedCourses){
         this.id_ = _id;
         this.username = username;
@@ -155,15 +181,18 @@ public class User implements Serializable {
     public void setInstitutionId(int institutionId){
         this.institutionId = institutionId;
     }
-
     public void setPendingClasses(List<Integer> pendingClasses){
         this.pendingClasses = pendingClasses;
     }
-
+    /**
+     * add pending class
+     */
     public void addPendingClass(Class pendingClass){
         this.pendingClasses.add(pendingClass.getId_());
     }
-
+    /**
+     *removes pending class
+     */
     public void removePendingClass(Class removeClass){
         for(int i = 0; i < this.pendingClasses.size(); ++i){
             if(removeClass.getId_() == this.pendingClasses.get(i)){
@@ -177,7 +206,9 @@ public class User implements Serializable {
         this.completedCourses = completedCourses;
     }
 
-
+    /**
+     * gets the whole user information
+     */
     public void copy(User user){
         this.id_ = user.getId_();
         this.email = user.getEmail();
@@ -190,7 +221,9 @@ public class User implements Serializable {
         this.pendingClasses = user.getPendingClasses();
         this.completedCourses = user.getCompletedCourses();
     }
-
+    /**
+     *sets user info to null
+     */
     public void clear(){
         this.id_ = null;
         this.email = null;
@@ -203,7 +236,9 @@ public class User implements Serializable {
         this.pendingClasses = null;
         this.completedCourses = null;
     }
-
+    /**
+     * doubles user information
+     */
     public User duplicate(){
         return new User(
                 this.id_,
@@ -218,7 +253,9 @@ public class User implements Serializable {
                 this.completedCourses
         );
     }
-
+    /**
+     *fire base again :)
+     */
     public Task<Void> updateUserInDatabase(FirebaseFirestore firebaseFirestore){
         return firebaseFirestore.collection(COLLECTION_USER).document(this.id_).set(this);
     }

@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Not being used
+ */
 public class FragmentMain extends Fragment {
 
     @Override

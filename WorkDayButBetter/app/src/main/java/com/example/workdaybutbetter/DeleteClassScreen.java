@@ -9,6 +9,9 @@ import com.example.data_classes.Class;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Not being used lol
+ */
 public class DeleteClassScreen extends AppCompatActivity {
 
     private ListView mViewList;

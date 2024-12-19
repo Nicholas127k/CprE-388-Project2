@@ -23,7 +23,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Activity for viewing class details.
+ *
+ * This activity displays the users class and allows you to view them, including its
+ * title, description, members, and sections. It also provides navigation
+ * to view the sign-up queue and administer credit for the class.
+ *
+ */
 public class ClassViewActivity extends AppCompatActivity {
 
     public static final String EXTRA_CLASSDATA = "EXTRA_CLASSDATA";
@@ -46,7 +53,10 @@ public class ClassViewActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestoreInstance;
 
     Class classData = null;
-
+    /**
+     * Initializes the activity, sets up UI elements, and displays class information.
+     * It also handles navigation to other activities related to the class.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

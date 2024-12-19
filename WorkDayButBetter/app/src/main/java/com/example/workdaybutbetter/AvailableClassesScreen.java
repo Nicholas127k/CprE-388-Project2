@@ -47,7 +47,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *This isnt being used
+ */
 public class AvailableClassesScreen extends AppCompatActivity {
     private EditText searchEditText;
     private Button searchButton;

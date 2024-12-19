@@ -16,23 +16,37 @@ import com.example.workdaybutbetter.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A dialog fragment for viewing a list of sections.
+ * This fragment displays a dialog with a list of sections. The user can
+ * view the details of each section and potentially perform actions on them.
+ */
 public class ViewSectionsDialogFragment extends DialogFragment {
 
     public static final String TAG = "VIEW_SECTIONS_DIALOG_FRAGMENT";
 
     private List<Section> dialogSections = new ArrayList<>();
-
+    /**
+     * Sets the list of sections to display in the dialog.
+     *
+     * @param dialogSections The list of sections.
+     */
     public void setDialogSections(List<Section> dialogSections){
         this.dialogSections = dialogSections;
     }
-
+    /**
+     * A listener interface for handling section refresh events.
+     */
     public interface ViewSectionsDialogFragmentListener{
         public void onSectionsRefresh(List<Section> newSections);
     }
 
     private ViewSectionsDialogFragmentListener viewSectionsDialogFragmentListener;
-
+    /**
+     * Sets the listener for handling section refresh events.
+     *not used
+     * @param viewSectionsDialogFragmentListener The listener to set.
+     */
     public void setViewSectionsDialogFragmentListener(ViewSectionsDialogFragmentListener viewSectionsDialogFragmentListener){
         this.viewSectionsDialogFragmentListener = viewSectionsDialogFragmentListener;
     }
@@ -41,7 +55,13 @@ public class ViewSectionsDialogFragment extends DialogFragment {
 
     private ListView sectionsListView;
     private ViewSectionsDialogSectionsListAdapter viewSectionsDialogSectionsListAdapter;
-
+    /**
+     * Creates the dialog for viewing the list of sections.
+     * This method inflates the dialog layout, sets up the views, and handles
+     * the button click events.
+     * @param savedInstanceState The saved instance state.
+     * @return The created dialog.
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         super.onCreateDialog(savedInstanceState);

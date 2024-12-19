@@ -41,7 +41,14 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Activity for searching classes.
+ *
+ * This activity allows users to search for classes by department, name, or code.
+ * It displays the search results in a list and provides navigation to
+ * either sign up for a class and or view its details.
 
+ */
 public class ClassSearchAcitvity extends AppCompatActivity {
 
     public static final String EXTRA_SIGNUP = "EXTRA_SIGNUP";
@@ -60,7 +67,11 @@ public class ClassSearchAcitvity extends AppCompatActivity {
     private List<Class> classQueryResults;
 
     private boolean signUpSearch;
-
+    /**
+     *
+     * Initializes the activity, sets up UI, and fetches initial class data.
+     * It also handles search queries and navigation to other activities based on user interactions.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

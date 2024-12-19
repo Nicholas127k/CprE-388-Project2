@@ -14,7 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+/**
+ *This isnt being used
+ */
 public class AdvisorMainScreenActivity extends AppCompatActivity {
 
     private AppCompatImageButton profileButton;

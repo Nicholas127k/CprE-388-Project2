@@ -24,7 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * Activity that displays the user's class schedule.
+ *
+ * This activity gets the user's enrolled classes from Firebase and displays them in a list.
+ * Users can see details of each class by clicking on it.
+ *
+ */
 public class ClassScheduleScreen extends AppCompatActivity {
 
     private Button exitButton;
@@ -34,6 +40,10 @@ public class ClassScheduleScreen extends AppCompatActivity {
     private ListView mViewList;
     private String userId; // Assuming userId is available. You can get it from Firebase Authentication or pass it from another activity.
 
+    /**
+     *
+     * Creates view when run and sets up the UI including list view.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +78,12 @@ public class ClassScheduleScreen extends AppCompatActivity {
             showClassDetailsPopup(selectedClass);
         });
     }
-
+    /**
+     * Fetches the user's enrolled classes from Firebase.
+     *
+     * This method gets the class IDs from the user's data in Firebase and then
+     * gets the details of each class using
+     */
     // Fetch the user's classes from Firebase based on their userId
     private void fetchUserClassesFirebase() {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("classes");
@@ -93,7 +108,11 @@ public class ClassScheduleScreen extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Fetches the details of the specific class from Firebase.
+     *
+     * @param classId The ID of the class to fetch.
+     */
     // Fetch class details based on class ID
     private void fetchClassDetails(String classId) {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("classes").child(classId);
@@ -113,7 +132,11 @@ public class ClassScheduleScreen extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Has popup dialog with the details of a selected class.
+     *
+     * @param selectedClass The Class object to display details for.
+     */
     // Show class details in a popup dialog when an item is clicked
     private void showClassDetailsPopup(Class selectedClass) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

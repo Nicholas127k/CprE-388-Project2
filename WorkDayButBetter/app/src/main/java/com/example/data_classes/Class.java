@@ -18,7 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
+/**
+ *this is a helper class that creates a structure for counselors to create class and for students to sign up for
+ */
 public class Class implements Serializable {
 
     public static final String COLLECTION_CLASS = "classes";
@@ -115,11 +117,18 @@ public class Class implements Serializable {
      *
      */
     private List<ClassSignUpQueueEntry> signUpQueue;
-
+    /**
+     *Professor for classs
+     */
     private List<User> professors;
-
+    /**
+     *To track the pre reqs for the particular classes
+     */
     private List<Class> prerequisites;
-
+    /**
+     *
+     *To create a class(School class) call this class an
+     */
     public Class() {
         this.id_ = -1;
         this.institutionId = -1;
@@ -133,7 +142,10 @@ public class Class implements Serializable {
         this.professors = new ArrayList<>();
         this.prerequisites = new ArrayList<>();
     }
-
+    /**
+     *
+     *To create a class(School class) call this class it will need an id, department, code, name of class, description of class, queue for students, school id, students in class,list of prereqs
+     */
     public Class(int _id, String department, long code, String name, String description, List<ClassSignUpQueueEntry> signUpQueue, int institutionId, List<User> professors, List<Class> prerequisites) {
         this.id_ = _id;
         this.institutionId = institutionId;
@@ -344,6 +356,10 @@ public class Class implements Serializable {
 
 
     public static final int SECTION_ALREADY_IN_CLASS = 1;
+    /**
+     *@param section
+     *adds a section if needed for class
+     */
     public int addSection(Section section){
 
         Collection<Section> sectionCollection = this.sectionBuckets.values();
@@ -358,9 +374,20 @@ public class Class implements Serializable {
         this.sectionBuckets.put(String.valueOf(this.sectionBuckets.keySet().size()), section);
         return SUCCESS;
     }
-
+    /**
+     *This determines if professor or not
+     */
     public static final int USER_NOT_PROFESSOR = 1;
+    /**
+     *This is used to verify if user exists
+     */
     public static final int USER_ALREADY_EXISTS = 2;
+    /**
+     *This isnt being used
+     * this would add professor to class
+     * @param professor
+     * returns success
+     */
     public int addProfessor(User professor){
         if(professor.getUserType() != UserType.PROFESSOR){
             return USER_NOT_PROFESSOR;

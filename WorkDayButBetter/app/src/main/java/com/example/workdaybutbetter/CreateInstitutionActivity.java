@@ -24,7 +24,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
+/**
+ * Activity for creating a new institution.
+ *
+ * This activity allows users to input institution details such as name and join code.
+ * It verifies if an institution with the same parameters already exists before
+ * creating a new institution in the database.
+ *
+ */
 public class CreateInstitutionActivity extends AppCompatActivity {
 
     private AppCompatButton createInstitutionButton;
@@ -34,7 +41,11 @@ public class CreateInstitutionActivity extends AppCompatActivity {
     private EditText institutionJoinCodeEditText;
 
     private FirebaseFirestore firebaseFirestoreInstance;
-
+    /**
+     * Initializes the activity
+     * for creating a new institution. It verifies the uniqueness of the institution
+     * before creating it in the database and provides feedback to the user.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
