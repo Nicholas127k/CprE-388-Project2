@@ -112,13 +112,13 @@ public class ClassSignUpActivity extends AppCompatActivity {
                 }
 
                 int result = classData.addMemberToSignUpQueue(new ClassSignUpQueueEntry(UserDataSingleton.getInstance(), sectionsPriorityList));
-                UserDataSingleton.getInstance().addPendingClass(classData);
 
                 if(result == Class.ERROR_MEMBER_ALREADY_EXISTS_IN_SIGN_UP_QUEUE){
                     Toast.makeText(getApplicationContext(), "You have already signed up for this class", Toast.LENGTH_LONG).show();
                     return;
                 }
 
+                UserDataSingleton.getInstance().addPendingClass(classData);
 
                 loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
 

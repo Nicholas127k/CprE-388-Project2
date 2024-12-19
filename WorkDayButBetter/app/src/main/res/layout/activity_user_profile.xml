@@ -101,53 +101,135 @@
         app:layout_constraintLeft_toLeftOf="parent"
         >
 
-        <TextView
-            android:id="@+id/activity_user_profile_username_text"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:layout_marginVertical="6dp"
+            <TextView
+                android:id="@+id/activity_user_profile_username_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:text="Username:"
-            android:textColor="@color/black"
-            android:textSize="10pt"
-            />
+                android:layout_marginVertical="6dp"
 
-        <TextView
-            android:id="@+id/activity_user_profile_email_text"
+                android:text="Username:"
+                android:textColor="@color/black"
+                android:textSize="10pt"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/activity_user_profile_username_edit_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:src="@drawable/baseline_edit_24"
+
+                android:background="@drawable/activity_user_profile_navigation_bar_button_background"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:layout_marginVertical="6dp"
+            <TextView
+                android:id="@+id/activity_user_profile_email_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:text="Email:"
-            android:textColor="@color/black"
-            android:textSize="10pt"
-            />
+                android:layout_marginVertical="6dp"
 
-        <TextView
-            android:id="@+id/activity_user_profile_firstname_text"
+                android:text="Email:"
+                android:textColor="@color/black"
+                android:textSize="10pt"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:layout_marginVertical="6dp"
+            <TextView
+                android:id="@+id/activity_user_profile_firstname_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:text="Firstname:"
-            android:textColor="@color/black"
-            android:textSize="10pt"
-            />
+                android:layout_marginVertical="6dp"
 
-        <TextView
-            android:id="@+id/activity_user_profile_lastname_text"
+                android:text="Firstname:"
+                android:textColor="@color/black"
+                android:textSize="10pt"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/activity_user_profile_firstname_edit_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:src="@drawable/baseline_edit_24"
+
+                android:background="@drawable/activity_user_profile_navigation_bar_button_background"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:layout_marginVertical="6dp"
+            <TextView
+                android:id="@+id/activity_user_profile_lastname_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:text="Lastname:"
-            android:textColor="@color/black"
-            android:textSize="10pt"
-            />
+                android:layout_marginVertical="6dp"
+
+                android:text="Lastname:"
+                android:textColor="@color/black"
+                android:textSize="10pt"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/activity_user_profile_lastname_edit_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:src="@drawable/baseline_edit_24"
+
+                android:background="@drawable/activity_user_profile_navigation_bar_button_background"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/activity_user_profile_usertype_text"

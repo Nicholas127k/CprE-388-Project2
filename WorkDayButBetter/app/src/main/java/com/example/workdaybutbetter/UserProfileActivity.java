@@ -21,9 +21,18 @@ import com.example.application_data.UserInstitutionSingleton;
 import com.example.data_classes.Institution;
 import com.example.data_classes.User;
 import com.example.data_classes.UserType;
+import com.example.firebase_controllers.UserFirebaseController;
+import com.example.firebase_controllers.UserFirebaseControllerSingleton;
+import com.example.workdaybutbetter.views.EditUserProfileInformationDialogFragment;
 import com.example.workdaybutbetter.views.JoinInstitutionDialogFragment;
+import com.example.workdaybutbetter.views.LoadingDialogFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 /**
  * Activity for displaying and managing user profile information.
  *
@@ -44,9 +53,21 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView userTypeText;
     private TextView institutionText;
 
+    private AppCompatImageButton editUsernameButton;
+    private EditUserProfileInformationDialogFragment editUserNameDialogFragment;
+
+    private AppCompatImageButton editFirstNameButton;
+    private EditUserProfileInformationDialogFragment editFirstNameDialogFragment;
+
+    private AppCompatImageButton editLastNameButton;
+    private EditUserProfileInformationDialogFragment editLastNameDialogFragment;
+
     private JoinInstitutionDialogFragment joinInstitutionDialogFragment;
 
+    private LoadingDialogFragment loadingDialogFragment;
+
     private FirebaseAuth firebaseAuthenticationInstance;
+    private FirebaseFirestore firebaseFirestoreInstance;
     /**
      * for the user profile screen. It displays user profile information, handles
      * logout functionality, and allows users to join an institution.
@@ -63,6 +84,18 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         firebaseAuthenticationInstance = FirebaseAuth.getInstance();
+        firebaseFirestoreInstance = FirebaseFirestore.getInstance();
+
+        loadingDialogFragment = new LoadingDialogFragment();
+
+        editUserNameDialogFragment = new EditUserProfileInformationDialogFragment();
+        editUserNameDialogFragment.setUserProfileEditTextHint("Username");
+
+        editFirstNameDialogFragment = new EditUserProfileInformationDialogFragment();
+        editFirstNameDialogFragment.setUserProfileEditTextHint("First Name");
+
+        editLastNameDialogFragment = new EditUserProfileInformationDialogFragment();
+        editLastNameDialogFragment.setUserProfileEditTextHint("Last Name");
 
         joinInstitutionDialogFragment = new JoinInstitutionDialogFragment();
         joinInstitutionDialogFragment.setInstitutionRefreshListener(new JoinInstitutionDialogFragment.JoinInstitutionDialogFragmentRefreshListener() {
@@ -133,20 +166,208 @@ public class UserProfileActivity extends AppCompatActivity {
         userTypeText = findViewById(R.id.activity_user_profile_usertype_text);
         institutionText = findViewById(R.id.activity_user_profile_institution_text);
 
+        editUsernameButton = findViewById(R.id.activity_user_profile_username_edit_button);
+        editUsernameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editUserNameDialogFragment.show(getSupportFragmentManager(), EditUserProfileInformationDialogFragment.TAG);
+            }
+        });
+
+        editUserNameDialogFragment.setEditUserProfileInformationListener(new EditUserProfileInformationDialogFragment.EditUserProfileInformationListener() {
+            @Override
+            public void onConfirmChange(String editTextData) {
+                loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+
+                if(editTextData.equals(UserDataSingleton.getInstance().getUsername())){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Username is the same", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(editTextData.isEmpty()){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Username field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                UserDataSingleton.getInstance().setUsername(editTextData);
+
+                UserDataSingleton.getInstance().updateUserInDatabase(firebaseFirestoreInstance).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).getUserFromId(UserDataSingleton.getInstance().getId_())
+                                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot documentSnapshots) {
+                                        UserDataSingleton.setInstance(documentSnapshots.getDocuments().get(0).toObject(User.class));
+                                        setTextViews(UserDataSingleton.getInstance(), UserInstitutionSingleton.getInstance());
+                                        loadingDialogFragment.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        loadingDialogFragment.dismiss();
+                                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        loadingDialogFragment.dismiss();
+                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                });
+
+            }
+        });
+
+        editFirstNameButton = findViewById(R.id.activity_user_profile_firstname_edit_button);
+        editFirstNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editFirstNameDialogFragment.show(getSupportFragmentManager(), EditUserProfileInformationDialogFragment.TAG);
+            }
+        });
+
+        editFirstNameDialogFragment.setEditUserProfileInformationListener(new EditUserProfileInformationDialogFragment.EditUserProfileInformationListener() {
+            @Override
+            public void onConfirmChange(String editTextData) {
+                loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+
+                if(editTextData.equals(UserDataSingleton.getInstance().getFirstname())){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Firstname is the same", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(editTextData.isEmpty()){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Firstname field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                UserDataSingleton.getInstance().setFirstname(editTextData);
+
+                UserDataSingleton.getInstance().updateUserInDatabase(firebaseFirestoreInstance).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).getUserFromId(UserDataSingleton.getInstance().getId_())
+                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot documentSnapshots) {
+                                                UserDataSingleton.setInstance(documentSnapshots.getDocuments().get(0).toObject(User.class));
+                                                setTextViews(UserDataSingleton.getInstance(), UserInstitutionSingleton.getInstance());
+                                                loadingDialogFragment.dismiss();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                loadingDialogFragment.dismiss();
+                                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                                return;
+                                            }
+                                        });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                loadingDialogFragment.dismiss();
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        });
+            }
+        });
+
+        editLastNameButton = findViewById(R.id.activity_user_profile_lastname_edit_button);
+        editLastNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editLastNameDialogFragment.show(getSupportFragmentManager(), EditUserProfileInformationDialogFragment.TAG);
+            }
+        });
+
+        editLastNameDialogFragment.setEditUserProfileInformationListener(new EditUserProfileInformationDialogFragment.EditUserProfileInformationListener() {
+            @Override
+            public void onConfirmChange(String editTextData) {
+                loadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+
+                if(editTextData.equals(UserDataSingleton.getInstance().getLastname())){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Lastname is the same", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(editTextData.isEmpty()){
+                    loadingDialogFragment.dismiss();
+                    Toast.makeText(getApplicationContext(), "Lastname field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                UserDataSingleton.getInstance().setLastname(editTextData);
+
+                UserDataSingleton.getInstance().updateUserInDatabase(firebaseFirestoreInstance).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                UserFirebaseControllerSingleton.getInstance(firebaseFirestoreInstance).getUserFromId(UserDataSingleton.getInstance().getId_())
+                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot documentSnapshots) {
+                                                UserDataSingleton.setInstance(documentSnapshots.getDocuments().get(0).toObject(User.class));
+                                                setTextViews(UserDataSingleton.getInstance(), UserInstitutionSingleton.getInstance());
+                                                loadingDialogFragment.dismiss();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                loadingDialogFragment.dismiss();
+                                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                                return;
+                                            }
+                                        });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                loadingDialogFragment.dismiss();
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        });
+            }
+        });
+
         User userData = UserDataSingleton.getInstance();
         Institution institution = UserInstitutionSingleton.getInstance();
 
-        usernameText.setText("Username:  " + userData.getUsername());
-        emailText.setText("Email:   " + userData.getEmail());
-        firstnameText.setText("Firstname:   " + userData.getFirstname());
-        lastnameText.setText("Lastname:   " + userData.getLastname());
-        userTypeText.setText("User Type:   " + userData.getUserType().toString());
+        setTextViews(userData, institution);
+
+    }
+
+    private void setTextViews(User user, Institution institution){
+        usernameText.setText("Username:  " + user.getUsername());
+        emailText.setText("Email:   " + user.getEmail());
+        firstnameText.setText("Firstname:   " + user.getFirstname());
+        lastnameText.setText("Lastname:   " + user.getLastname());
+        userTypeText.setText("User Type:   " + user.getUserType().toString());
 
         if(institution.getId_() == -1){
             institutionText.setText("Institution:    None");
         }else{
             institutionText.setText("Institution:    "+institution.getInstitutionName());
         }
-
     }
 }
