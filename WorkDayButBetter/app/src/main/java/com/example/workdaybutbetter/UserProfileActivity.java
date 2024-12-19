@@ -24,7 +24,13 @@ import com.example.data_classes.UserType;
 import com.example.workdaybutbetter.views.JoinInstitutionDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+/**
+ * Activity for displaying and managing user profile information.
+ *
+ * This activity allows users to view their profile details, such as username,
+ * email, first name, last name, user type, and institution. It also provides
+ * options for logging out and joining an institution.
+ */
 public class UserProfileActivity extends AppCompatActivity {
 
     private AppCompatImageButton backButton;
@@ -41,7 +47,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private JoinInstitutionDialogFragment joinInstitutionDialogFragment;
 
     private FirebaseAuth firebaseAuthenticationInstance;
-
+    /**
+     * for the user profile screen. It displays user profile information, handles
+     * logout functionality, and allows users to join an institution.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

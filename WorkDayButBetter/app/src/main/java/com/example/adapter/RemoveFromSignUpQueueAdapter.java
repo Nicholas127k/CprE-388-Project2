@@ -15,13 +15,25 @@ import com.example.workdaybutbetter.R;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * An adapter for displaying a list of classes in a remove-from-sign-up-queue list.
+ *
+ * This adapter provides a view for each class in the list, allowing users to remove
+ * themselves from the sign-up queue for that class.
+ */
 
 public class RemoveFromSignUpQueueAdapter extends ArrayAdapter<Class> {
 
     private Context context;
     private int layoutId;
     private List<Class> classData;
-
+    /**
+     * Constructor for the RemoveFromSignUpQueueAdapter.
+     *
+     * @param context  The context of the activity.
+     * @param resource The layout resource ID for the list item view.
+     * @param objects  The list of Class objects to display.
+     */
     public RemoveFromSignUpQueueAdapter(@NonNull Context context, int resource, @NonNull List<Class> objects) {
         super(context, resource, objects);
 
@@ -29,17 +41,29 @@ public class RemoveFromSignUpQueueAdapter extends ArrayAdapter<Class> {
         this.layoutId = resource;
         this.classData = objects;
     }
-
+    /**
+     * Interface for handling click events on the remove button.
+     */
     public interface OnClickListener{
         public void onClick(View view, Class class_);
     }
 
     private OnClickListener onClickListener;
-
+    /**
+     * Sets the click listener for the remove button.
+     *
+     * @param onClickListener The click listener to set.
+     */
     public void setOnButtonClickListener(OnClickListener onClickListener){
         this.onClickListener = onClickListener;
     }
-
+    /**
+     * Sets up each individual list item view.
+     *
+     * @param position
+     *  @param convertView
+     *  @param parent
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
@@ -67,7 +91,11 @@ public class RemoveFromSignUpQueueAdapter extends ArrayAdapter<Class> {
 
         return resultView;
     }
-
+    /**
+     * sets the adapter with new sign-up queue data.
+     *
+     * @param classes The new list of Class objects to display.
+     */
     public void setSignUpQueueData(List<Class> classes){
         List<Class> dataCopy = new ArrayList<>(classes);
         this.clear();

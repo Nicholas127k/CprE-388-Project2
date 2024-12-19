@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
+/**
+ *This isnt being used
+ */
 public class AdvisorMainScreenFragment extends Fragment {
 
 

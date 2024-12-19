@@ -14,7 +14,9 @@ import com.example.data_classes.Class;
 import com.example.workdaybutbetter.R;
 
 import java.util.ArrayList;
-
+/**
+ *This isnt being used :)
+ */
 public class ClassLIstAdapter extends ArrayAdapter<Class> {
     private final int layoutResource;
     int stuff;

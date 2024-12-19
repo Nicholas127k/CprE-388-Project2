@@ -3,7 +3,9 @@ package com.example.utilities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *each class section has a time range and this utilities class helps create that for each section
+ */
 public class ClassSectionTimeRange implements Serializable {
 
     private List<ClassSectionDayEnum> days;
@@ -15,13 +17,20 @@ public class ClassSectionTimeRange implements Serializable {
         this.startTime = "00:00";
         this.endTime = "23:59";
     }
-
+    /**
+     *class section time range has, days of week, start time, and end time
+     * @param days the days
+     * @param startTime the start time
+     * @param endTime the end time
+     */
     public ClassSectionTimeRange(List<ClassSectionDayEnum> days, String startTime, String endTime){
         this.days = days;
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
+    /**
+     *GETTERS & SETTERS
+     */
     public List<ClassSectionDayEnum> getDays(){
         return this.days;
     }

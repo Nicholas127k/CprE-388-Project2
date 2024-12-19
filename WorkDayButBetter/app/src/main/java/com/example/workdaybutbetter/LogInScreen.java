@@ -38,7 +38,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
-
+/**
+ * Activity for user login.
+ *
+ * This activity provides a login screen where users can enter their credentials
+ * and sign in to the application. It uses Firebase Authentication to authenticate
+ * users and retrieves user data from Firestore. It also handles navigation to
+ * the appropriate main activity based on the user's role.
+ */
 
 public class LogInScreen extends AppCompatActivity {
     private EditText usernameEditText;
@@ -52,7 +59,11 @@ public class LogInScreen extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestoreInstance;
 
     private LoadingDialogFragment loadingDialogFragment;
-
+    /**
+     * Initializes the activity, sets up UI elements, and handles user interactions
+     * for login. It validates user input, authenticates users using Firebase,
+     * retrieves user data, and navigates to the appropriate main activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

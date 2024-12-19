@@ -34,7 +34,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Activity for creating a new class.
+ *
+ * This activity allows users to input class details such as name, number,
+ * description, and department. It also provides functionality to add and
+ * view sections for the class before creating it in the database.
+ *
+ */
 public class CreateClassActivity extends AppCompatActivity {
 
     private EditText classNameEditText;
@@ -59,7 +66,11 @@ public class CreateClassActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestoreInstance;
 
     private LoadingDialogFragment loadingDialogFragment;
-
+    /**
+     * Initializes the activity
+     * for creating a new class. It validates user input, adds sections, and
+     * interacts with the database to store the new class information.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

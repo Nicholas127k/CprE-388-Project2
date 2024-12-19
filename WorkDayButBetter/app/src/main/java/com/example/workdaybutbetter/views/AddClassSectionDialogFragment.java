@@ -18,17 +18,31 @@ import com.example.workdaybutbetter.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * A dialog fragment for adding a new class section.
+ * * This fragment displays a dialog where the user can enter the details of a
+ * new class section, such as the section label, time range, days of the week,
+ * and section size. When the user clicks the "Add Section" button, the
+ * fragment calls the `onCompleteBuildingSection` method of the
+ * `AddClassSectionDialogListener` to notify the listener that the section
+ * has been created.
+ */
 public class AddClassSectionDialogFragment extends DialogFragment {
 
     public static final String TAG = "ADD_CLASS_SECTION_DIALOG_FRAGMENT";
-
+    /**
+     * Called when the user completes building a section.
+     */
     public interface AddClassSectionDialogListener{
         public void onCompleteBuildingSection(Section section);
     }
 
     private AddClassSectionDialogListener addClassSectionDialogListener;
-
+    /**
+     * Sets the listener for handling the completion of building a section.
+     *
+     * @param listener The listener to set.
+     */
     public void setAddClassSectionDialogListener(AddClassSectionDialogListener listener){
         this.addClassSectionDialogListener = listener;
     }
@@ -46,7 +60,15 @@ public class AddClassSectionDialogFragment extends DialogFragment {
 
     private AppCompatButton addSectionButton;
     private AppCompatButton cancelButton;
-
+    /**
+     * Creates the dialog for adding a new class section.
+     *
+     * This method inflates the dialog layout, sets up the views, and handles
+     * the button click events.
+     *
+     * @param savedInstanceState The saved instance state.
+     * @return The created dialog.
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         super.onCreateDialog(savedInstanceState);

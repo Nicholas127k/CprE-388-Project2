@@ -8,6 +8,9 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.workdaybutbetter.AdvisorMainScreenFragment;
 import com.example.workdaybutbetter.ControlFragment;
 
+/**
+ * This is not in use
+ */
 public class TabAdapter extends FragmentStateAdapter {
 
     public TabAdapter(@NonNull FragmentActivity fragmentActivity) {

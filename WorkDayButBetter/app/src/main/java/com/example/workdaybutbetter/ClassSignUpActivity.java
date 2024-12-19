@@ -27,7 +27,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Activity for signing up for a class.
+ *
+ * This activity allows users to select their preferred sections for a class
+ * and sign up for the class. It displays the class information and a list of
+ * available sections with priority selection.
+ *
+ */
 public class ClassSignUpActivity extends AppCompatActivity {
 
     public static final String EXTRA_CLASSDATA = "EXTRA_CLASSDATA";
@@ -47,7 +54,11 @@ public class ClassSignUpActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestoreInstance;
 
     private Class classData = null;
-
+    /**
+     * Initializes the activity
+     * for signing up for a class. It takes user input, updates the database,
+     * and provides feedback to the user.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -31,7 +31,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
+/**
+ * Activity for user sign-up.
+ *
+ * This activity provides a sign-up screen where users can create a new account
+ * by entering their details such as username, email, password, and user type.
+ * It uses Firebase Authentication to create the user account and stores user
+ * data in Firestore.
+ */
 public class SignUpScreen extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText emailEditText;
@@ -47,7 +54,11 @@ public class SignUpScreen extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuthenticationInstance;
     private FirebaseFirestore firebaseFirestoreInstance;
-
+    /**
+     * Initializes the activity, sets up UI elements, and handles user interactions
+     * for sign-up. It validates user input, creates a user account using Firebase,
+     * stores user data, and handles navigation.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

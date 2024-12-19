@@ -24,8 +24,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Activity for removing classes from the sign-up queue.
+ * This activity displays a list of classes that the user has signed up for
+ * and allows them to remove themselves from the sign-up queue for those classes.
+ * It also supports a counselor view for managing the sign-up queue of other users.
 
-public class RemoveFromSignUpQueueActivity extends AppCompatActivity {
+ */public class RemoveFromSignUpQueueActivity extends AppCompatActivity {
 
     public static final String EXTRA_COUNSELOR_VIEW = "EXTRA_COUNSELOR_VIEW";
 
@@ -41,7 +46,11 @@ public class RemoveFromSignUpQueueActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestoreInstance;
 
     private LoadingDialogFragment loadingDialogFragment;
-
+    /**
+     * Initializes the activity
+     * for removing classes from the sign-up queue. It retrieves the sign-up queue
+     * data, displays it in a list, and handles button clicks for removing classes.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

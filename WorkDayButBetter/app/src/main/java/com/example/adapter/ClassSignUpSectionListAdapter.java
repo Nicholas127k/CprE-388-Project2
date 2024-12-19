@@ -22,7 +22,13 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * An adapter for displaying a list of sections for class sign-up.
+ *
+ * This adapter extends the ArrayAdapter} class and is responsible for
+ * creating and  managing the views that display section information in a list
+ * during class  sign-up
+ */
 public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
 
     private Context context;
@@ -32,7 +38,13 @@ public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
 
     private ArrayAdapter<String> sectionsListItemSpinnerAdapter;
     private List<String> spinnerData;
-
+    /**
+     * Constructor for the ClassSignUpSectionListAdapter.
+     *
+     * @param context  The context in which the adapter is used.
+     * @param resource The resource ID of the layout to use for each list item.
+     * @param objects The list of {section objects to display.
+     */
     public ClassSignUpSectionListAdapter(@NonNull Context context, int resource, @NonNull List<Section> objects) {
         super(context, resource, objects);
 
@@ -53,7 +65,18 @@ public class ClassSignUpSectionListAdapter extends ArrayAdapter<Section> {
         sectionsListItemSpinnerAdapter = new ArrayAdapter<String>(context, com.google.android.material.R.layout.support_simple_spinner_dropdown_item, this.spinnerData);
 
     }
-
+    /**
+     * {@inheritDoc}
+     *
+     * Gets the view for a specific position in the list.
+     * This method inflates the layout for the list item, sets up the views
+     * with the section information, and handles the spinner selection for
+     * section priority.
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view for the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent){

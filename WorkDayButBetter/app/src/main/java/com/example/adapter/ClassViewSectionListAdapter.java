@@ -1,6 +1,7 @@
 package com.example.adapter;
 
 import android.content.Context;
+import android.icu.number.NumberFormatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,14 @@ import com.example.data_classes.Section;
 import com.example.workdaybutbetter.R;
 
 import java.util.List;
+/**
+ * An adapter for displaying a list of sections in a class view.
+ *
+ * This adapter  extends the ArrayAdapter class and is responsible for
+ * creating and managing  the views that display section information in a list
+ * within a class view.
 
+ */
 public class ClassViewSectionListAdapter extends ArrayAdapter<Section> {
 
     private Context context;
@@ -28,7 +36,16 @@ public class ClassViewSectionListAdapter extends ArrayAdapter<Section> {
         this.layoutId = resource;
         this.sectionsList = objects;
     }
-
+    /**
+     * Gets the view for  a specific position in the list.
+     * This method inflates the layout for the list item, sets up the views
+     *NumberFormatter.with the section information, and handles theandroidx.test.espresso.action.ViewActions.click listener for the
+     * section item.
+     * @param position    The  position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this  view will eventually be attached to.
+     * @return The view for the  specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent){

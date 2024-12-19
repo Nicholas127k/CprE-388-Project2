@@ -26,7 +26,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
-
+/**
+ * A dialog fragment for joining an institution.
+ *
+ * This fragment displays a dialog where the user can enter a join code to
+ * join an institution. If the join code is valid, the user's institution
+ * ID is updated in the database and the fragment is dismissed.
+ */
 public class JoinInstitutionDialogFragment extends DialogFragment {
 
     public static final int SUCCESS = 1;
@@ -35,17 +41,33 @@ public class JoinInstitutionDialogFragment extends DialogFragment {
     private EditText joinCodeEditText;
 
     private FirebaseFirestore firebaseFirestoreInstance;
-
+    /**
+     * A listener interface for handling institution refresh events.
+     */
     private JoinInstitutionDialogFragmentRefreshListener joinInstitutionDialogFragmentRefreshListener;
-
+    /**
+     * Called when the institution needs to be refreshed.
+     */
     public interface JoinInstitutionDialogFragmentRefreshListener{
         public void onInstitutionRefresh(Institution institution, int status, String errorMessage);
     }
-
+    /**
+     * Sets the listener for handling institution refresh events.
+     * @param joinInstitutionDialogFragmentRefreshListener The listener to set.
+     */
     public void setInstitutionRefreshListener(JoinInstitutionDialogFragmentRefreshListener joinInstitutionDialogFragmentRefreshListener){
         this.joinInstitutionDialogFragmentRefreshListener = joinInstitutionDialogFragmentRefreshListener;
     }
+    /**
 
+     * Creates the dialog for joining an institution.
+     *
+     * This method inflates the dialog layout, sets up the views, and handles
+     * the button click events.
+     *
+     * @param savedInstanceState The saved instance state.
+     * @return The created dialog.
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         super.onCreateDialog(savedInstanceState);
